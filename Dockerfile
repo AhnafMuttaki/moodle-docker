@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev
 
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 RUN docker-php-ext-install zip && docker-php-ext-enable zip
 RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
