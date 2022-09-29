@@ -1,5 +1,10 @@
 FROM php:7.4-apache
 
+ARG app_port
+
+
+RUN sed -si 's/Listen 80/Listen '$app_port'/' /etc/apache2/ports.conf
+RUN sed -si 's/VirtualHost .:80/VirtualHost *:'$app_port'/' /etc/apache2/sites-enabled/000-default.conf
 
 
 RUN apt-get update && apt-get install -y \
@@ -25,11 +30,6 @@ RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
 RUN docker-php-ext-install soap && docker-php-ext-enable soap
 
-ARG app_port
-ARG db_root_password
-ENV APP_PORT $app_port
-ENV DB_ROOT_PASSWORD $db_root_password
-
 
 RUN cd /var/www
 RUN mkdir /var/www/moodledata
@@ -39,5 +39,6 @@ RUN chown -R root /var/www/moodledata
 RUN chmod 0777 /var/www/moodledata
 # COPY ./moodle311 /var/www/html
 WORKDIR /var/www/html
+EXPOSE $app_port
 # RUN php admin/cli/install.php
 
