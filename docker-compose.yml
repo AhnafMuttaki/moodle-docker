@@ -11,7 +11,7 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
 
-    container_name: moodle311
+    container_name: moodle4
     network_mode: host
     volumes:
       - ./moodle400:/var/www/html

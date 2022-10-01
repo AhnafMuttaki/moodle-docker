@@ -21,15 +21,23 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libicu-dev \
-    libxml2-dev
+    libxml2-dev \
+    libpq-dev
+
+
 
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 RUN docker-php-ext-install zip && docker-php-ext-enable zip
 RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
 RUN docker-php-ext-install soap && docker-php-ext-enable soap
+RUN docker-php-ext-install pgsql pdo_pgsql && docker-php-ext-enable pgsql pdo_pgsql
+RUN docker-php-ext-install xmlrpc && docker-php-ext-enable xmlrpc
+RUN docker-php-ext-install exif && docker-php-ext-enable exif
+RUN docker-php-ext-install opcache
 
+
+COPY ./php_conf/* /usr/local/etc/php/conf.d/
 
 RUN cd /var/www
 RUN mkdir /var/www/moodledata
