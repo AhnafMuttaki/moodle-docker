@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 
 
 
@@ -38,6 +38,9 @@ RUN mkdir /var/www/moodledata
 RUN chown -R root /var/www/moodledata
 RUN chmod 0777 /var/www/moodledata
 # COPY ./moodle311 /var/www/html
+
+COPY ./php_conf/* /usr/local/etc/php/conf.d/
+
 WORKDIR /var/www/html
 # RUN php admin/cli/install.php
 

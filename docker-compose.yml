@@ -20,7 +20,7 @@ services:
     restart: always
 
   db:
-    image: mysql:5.7.38
+    image: mysql:8.0.37
     container_name: moodledb
     ports:
       - ${MYSQL_PORT}:3306
