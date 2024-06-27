@@ -50,6 +50,7 @@ $string['filetypesnotall'] = 'It is not allowed to select \'All file types\' her
 $string['filetypesnotallowed'] = 'These file types are not allowed here: {$a}';
 $string['filetypesothers'] = 'Other files';
 $string['filetypesunknown'] = 'Unknown file types: {$a}';
+$string['formactions'] = 'Form actions';
 $string['general'] = 'General';
 $string['hideadvanced'] = 'Hide advanced';
 $string['hour'] = 'Hour';
@@ -88,6 +89,3 @@ $string['timeunit'] = 'Time unit';
 $string['timing'] = 'Timing';
 $string['unmaskpassword'] = 'Unmask';
 $string['year'] = 'Year';
-
-// Deprecated since Moodle 3.10.
-$string['filetypesnotwhitelisted'] = 'These file types are not allowed here: {$a}';

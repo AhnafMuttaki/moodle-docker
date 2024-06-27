@@ -17,9 +17,10 @@
 namespace qbank_statistics;
 
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
-use quiz;
+use quiz_statistics\tests\statistics_helper;
+use mod_quiz\quiz_attempt;
+use mod_quiz\quiz_settings;
 use question_engine;
-use quiz_attempt;
 
 /**
  * Tests for question statistics.
@@ -171,7 +172,7 @@ class helper_test extends \advanced_testcase {
         // Create user.
         $user = $this->getDataGenerator()->create_user();
         // Create attempt.
-        $quizobj = quiz::create($quiz->id, $user->id);
+        $quizobj = quiz_settings::create($quiz->id, $user->id);
         $quba = question_engine::make_questions_usage_by_activity('mod_quiz', $quizobj->get_context());
         $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
         $timenow = time();
@@ -225,6 +226,11 @@ class helper_test extends \advanced_testcase {
         foreach ($quiz2attempts as $attempt) {
             $this->submit_quiz($quiz2, $attempt);
         }
+
+        // Calculate the statistics.
+        $this->expectOutputRegex('~.*Calculations completed.*~');
+        statistics_helper::run_pending_recalculation_tasks();
+
         return [$quiz1, $quiz2, $questions];
     }
 

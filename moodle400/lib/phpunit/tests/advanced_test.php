@@ -23,8 +23,13 @@ namespace core;
  * @category   test
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @coversDefaultClass \advanced_testcase
  */
 class advanced_test extends \advanced_testcase {
+    public static function setUpBeforeClass(): void {
+        global $CFG;
+        require_once(__DIR__ . '/fixtures/adhoc_test_task.php');
+    }
 
     public function test_debugging() {
         global $CFG;
@@ -308,78 +313,6 @@ class advanced_test extends \advanced_testcase {
         $this->assertFalse($DB->get_record('user', array('id'=>9999)));
     }
 
-    public function test_load_data_dataset_xml() {
-        global $DB;
-
-        $this->resetAfterTest();
-
-        $this->assertFalse($DB->record_exists('user', array('id' => 5)));
-        $this->assertFalse($DB->record_exists('user', array('id' => 7)));
-        $dataset = $this->createXMLDataSet(__DIR__.'/fixtures/sample_dataset.xml');
-        $this->assertDebuggingCalled('createXMLDataSet() is deprecated. Please use dataset_from_files() instead.');
-        $this->loadDataSet($dataset);
-        $this->assertDebuggingCalled('loadDataSet() is deprecated. Please use dataset->to_database() instead.');
-        $this->assertTrue($DB->record_exists('user', array('id' => 5)));
-        $this->assertTrue($DB->record_exists('user', array('id' => 7)));
-        $user5 = $DB->get_record('user', array('id' => 5));
-        $user7 = $DB->get_record('user', array('id' => 7));
-        $this->assertSame('bozka.novakova', $user5->username);
-        $this->assertSame('pepa.novak', $user7->username);
-
-    }
-
-    public function test_load_dataset_csv() {
-        global $DB;
-
-        $this->resetAfterTest();
-
-        $this->assertFalse($DB->record_exists('user', array('id' => 8)));
-        $this->assertFalse($DB->record_exists('user', array('id' => 9)));
-        $dataset = $this->createCsvDataSet(array('user' => __DIR__.'/fixtures/sample_dataset.csv'));
-        $this->assertDebuggingCalled('createCsvDataSet() is deprecated. Please use dataset_from_files() instead.');
-        $this->loadDataSet($dataset);
-        $this->assertDebuggingCalled('loadDataSet() is deprecated. Please use dataset->to_database() instead.');
-        $this->assertEquals(5, $DB->get_field('user', 'id', array('username' => 'bozka.novakova')));
-        $this->assertEquals(7, $DB->get_field('user', 'id', array('username' => 'pepa.novak')));
-
-    }
-
-    public function test_load_dataset_array() {
-        global $DB;
-
-        $this->resetAfterTest();
-
-        $data = array(
-            'user' => array(
-                array('username', 'email'),
-                array('top.secret', 'top@example.com'),
-                array('low.secret', 'low@example.com'),
-            ),
-        );
-
-        $this->assertFalse($DB->record_exists('user', array('email' => 'top@example.com')));
-        $this->assertFalse($DB->record_exists('user', array('email' => 'low@example.com')));
-        $dataset = $this->createArrayDataSet($data);
-        $this->assertDebuggingCalled('createArrayDataSet() is deprecated. Please use dataset_from_array() instead.');
-        $this->loadDataSet($dataset);
-        $this->assertDebuggingCalled('loadDataSet() is deprecated. Please use dataset->to_database() instead.');
-        $this->assertTrue($DB->record_exists('user', array('email' => 'top@example.com')));
-        $this->assertTrue($DB->record_exists('user', array('email' => 'low@example.com')));
-
-        $data = array(
-            'user' => array(
-                array('username' => 'noidea', 'email' => 'noidea@example.com'),
-                array('username' => 'onemore', 'email' => 'onemore@example.com'),
-            ),
-        );
-        $dataset = $this->createArrayDataSet($data);
-        $this->assertDebuggingCalled('createArrayDataSet() is deprecated. Please use dataset_from_array() instead.');
-        $this->loadDataSet($dataset);
-        $this->assertDebuggingCalled('loadDataSet() is deprecated. Please use dataset->to_database() instead.');
-        $this->assertTrue($DB->record_exists('user', array('username' => 'noidea')));
-        $this->assertTrue($DB->record_exists('user', array('username' => 'onemore')));
-    }
-
     public function test_assert_time_current() {
         $this->assertTimeCurrent(time());
 
@@ -404,6 +337,54 @@ class advanced_test extends \advanced_testcase {
         } catch (\Exception $e) {
             $this->assertInstanceOf('PHPUnit\Framework\ExpectationFailedException', $e);
         }
+    }
+
+    /**
+     * Test the assertEventContextNotUsed() assertion.
+     *
+     * Verify that events using the event context in some of their
+     * methods are detected properly (will throw a warning if they are).
+     *
+     * To do so, we'll be using some fixture events (context_used_in_event_xxxx),
+     * that, on purpose, use the event context (incorrectly) in their methods.
+     *
+     * Note that because we are using imported fixture classes, and because we
+     * are testing for warnings, better we run the tests in a separate process.
+     *
+     * @param string $fixture The fixture class to use.
+     * @param bool $phpwarn Whether a PHP warning is expected.
+     *
+     * @runInSeparateProcess
+     * @dataProvider assert_event_context_not_used_provider
+     * @covers ::assertEventContextNotUsed
+     */
+    public function test_assert_event_context_not_used($fixture, $phpwarn): void {
+        require(__DIR__ . '/fixtures/event_fixtures.php');
+        // Create an event that uses the event context in its get_url() and get_description() methods.
+        $event = $fixture::create([
+            'other' => [
+                'sample' => 1,
+                'xx' => 10,
+            ],
+        ]);
+
+        if ($phpwarn) {
+            $this->expectWarning();
+        }
+        $this->assertEventContextNotUsed($event);
+    }
+
+    /**
+     * Data provider for test_assert_event_context_not_used().
+     *
+     * @return array
+     */
+    public static function assert_event_context_not_used_provider(): array {
+        return [
+            'correct' => ['\core\event\context_used_in_event_correct', false],
+            'wrong_get_url' => ['\core\event\context_used_in_event_get_url', true],
+            'wrong_get_description' => ['\core\event\context_used_in_event_get_description', true],
+        ];
     }
 
     public function test_message_processors_reset() {
@@ -696,5 +677,54 @@ class advanced_test extends \advanced_testcase {
         // Reset test data and ansure the useragent was cleaned.
         self::resetAllData(false);
         self::assertFalse(\core_useragent::get_user_agent_string(), 'It should not be set again, data was reset.');
+    }
+
+    /**
+     * @covers ::runAdhocTasks
+     */
+    public function test_runadhoctasks_no_tasks_queued(): void {
+        $this->runAdhocTasks();
+        $this->expectOutputRegex('/^$/');
+    }
+
+    /**
+     * @covers ::runAdhocTasks
+     */
+    public function test_runadhoctasks_tasks_queued(): void {
+        $this->resetAfterTest(true);
+        $admin = get_admin();
+        \core\task\manager::queue_adhoc_task(new \core_phpunit\adhoc_test_task());
+        $this->runAdhocTasks();
+        $this->expectOutputRegex("/Task was run as {$admin->id}/");
+    }
+
+    /**
+     * @covers ::runAdhocTasks
+     */
+    public function test_runadhoctasks_with_existing_user_change(): void {
+        $this->resetAfterTest(true);
+        $admin = get_admin();
+
+        $this->setGuestUser();
+        \core\task\manager::queue_adhoc_task(new \core_phpunit\adhoc_test_task());
+        $this->runAdhocTasks();
+        $this->expectOutputRegex("/Task was run as {$admin->id}/");
+    }
+
+    /**
+     * @covers ::runAdhocTasks
+     */
+    public function test_runadhoctasks_with_existing_user_change_and_specified(): void {
+        global $USER;
+
+        $this->resetAfterTest(true);
+        $user = $this->getDataGenerator()->create_user();
+
+        $this->setGuestUser();
+        $task = new \core_phpunit\adhoc_test_task();
+        $task->set_userid($user->id);
+        \core\task\manager::queue_adhoc_task($task);
+        $this->runAdhocTasks();
+        $this->expectOutputRegex("/Task was run as {$user->id}/");
     }
 }

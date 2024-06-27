@@ -92,7 +92,6 @@ class lib_test extends \advanced_testcase {
         $expected->userid = $user->id;
         $expected->content = $fakepost->message;
         $expected->pathnamehashes = array($fi->get_pathnamehash());
-        $this->assertEventLegacyData($expected, $event);
         $this->assertEventContextNotUsed($event);
     }
 
@@ -2230,9 +2229,6 @@ class lib_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_forum\event\discussion_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $expected = array($course->id, 'forum', 'view discussion', "discuss.php?d={$discussion->id}",
-            $discussion->id, $forum->cmid);
-        $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
 
         $this->assertNotEmpty($event->get_name());
@@ -4260,5 +4256,88 @@ class lib_test extends \advanced_testcase {
         $throttling = forum_check_throttling($forum);
         $this->assertIsObject($throttling);
         $this->assertFalse($throttling->canpost);
+    }
+
+    /**
+     * Tests forum_count_discussions.
+     *
+     * @covers ::forum_count_discussions
+     */
+    public function test_forum_count_discussions(): void {
+        $this->resetAfterTest();
+
+        $generator = $this->getDataGenerator();
+        $forumgenerator = $generator->get_plugin_generator('mod_forum');
+        $course1 = $generator->create_course();
+        $course2 = $generator->create_course();
+        $student = $generator->create_user(['trackforums' => 1]);
+
+        // First forum.
+        $forumobj1 = new \stdClass();
+        $forumobj1->introformat = FORMAT_HTML;
+        $forumobj1->course = $course1->id;
+        $forumobj1->trackingtype = FORUM_TRACKING_FORCED;
+        $forum1 = $generator->create_module('forum', $forumobj1);
+        $forum1cm = get_coursemodule_from_id('forum', $forum1->cmid, 0, false, MUST_EXIST);
+
+        // Second forum.
+        $forumobj2 = new \stdClass();
+        $forumobj2->introformat = FORMAT_HTML;
+        $forumobj2->course = $course2->id;
+        $forumobj2->trackingtype = FORUM_TRACKING_OFF;
+        $forum2 = $generator->create_module('forum', $forumobj2);
+        $forum2cm = get_coursemodule_from_id('forum', $forum2->cmid, 0, false, MUST_EXIST);
+
+        // Third forum.
+        $forumobj3 = new \stdClass();
+        $forumobj3->introformat = FORMAT_HTML;
+        $forumobj3->course = $course2->id;
+        $forumobj3->trackingtype = FORUM_TRACKING_OFF;
+        $forum3 = $generator->create_module('forum', $forumobj3);
+        $forum3cm = get_coursemodule_from_id('forum', $forum3->cmid, 0, false, MUST_EXIST);
+
+        // First make sure there are no discussions for any of the forums.
+        $f1discussionscount = forum_count_discussions($forum1, $forum1cm, $course1);
+        $this->assertEquals(0, $f1discussionscount);
+        $f2discussionscount = forum_count_discussions($forum2, $forum2cm, $course2);
+        $this->assertEquals(0, $f2discussionscount);
+        $f3discussionscount = forum_count_discussions($forum3, $forum3cm, $course2);
+        $this->assertEquals(0, $f3discussionscount);
+
+        // Add 3 discussions to forum 1.
+        $discussionobj1 = new \stdClass();
+        $discussionobj1->course = $course1->id;
+        $discussionobj1->userid = $student->id;
+        $discussionobj1->forum = $forum1->id;
+        $forumgenerator->create_discussion($discussionobj1);
+        $forumgenerator->create_discussion($discussionobj1);
+        $forumgenerator->create_discussion($discussionobj1);
+
+        // Make sure there are 3 discussions.
+        $f1discussionscount = forum_count_discussions($forum1, $forum1cm, $course1);
+        $this->assertEquals(3, $f1discussionscount);
+
+        // Add 4 discussions to forum 2.
+        $discussionobj2 = new \stdClass();
+        $discussionobj2->course = $course2->id;
+        $discussionobj2->userid = $student->id;
+        $discussionobj2->forum = $forum2->id;
+        $forumgenerator->create_discussion($discussionobj2);
+        $forumgenerator->create_discussion($discussionobj2);
+        $forumgenerator->create_discussion($discussionobj2);
+        $discussion24 = $forumgenerator->create_discussion($discussionobj2);
+
+        // Make sure there are 4 discussions.
+        $f2discussionscount = forum_count_discussions($forum2, $forum2cm, $course2);
+        $this->assertEquals(4, $f2discussionscount);
+
+        // Delete one discussion from forum 2.
+        forum_delete_discussion($discussion24, true, $course2, $forum2cm, $forum2);
+        $f2discussionscount = forum_count_discussions($forum2, $forum2cm, $course2);
+        $this->assertEquals(3, $f2discussionscount);
+
+        // Make sure there are no discussions.
+        $f3discussionscount = forum_count_discussions($forum3, $forum3cm, $course2);
+        $this->assertEquals(0, $f3discussionscount);
     }
 }

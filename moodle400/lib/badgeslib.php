@@ -131,7 +131,7 @@ class_alias('\core_badges\badge', 'badge');
 /**
  * Sends notifications to users about awarded badges.
  *
- * @param badge $badge Badge that was issued
+ * @param \core_badges\badge $badge Badge that was issued
  * @param int $userid Recipient ID
  * @param string $issued Unique hash of an issued badge
  * @param string $filepathhash File path hash of an issued badge for attachments
@@ -149,7 +149,8 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
     $userfrom->firstname = !empty($CFG->badges_defaultissuername) ? $CFG->badges_defaultissuername : $admin->firstname;
     $userfrom->maildisplay = true;
 
-    $issuedlink = html_writer::link(new moodle_url('/badges/badge.php', array('hash' => $issued)), $badge->name);
+    $badgeurl = new moodle_url('/badges/badge.php', ['hash' => $issued]);
+    $issuedlink = html_writer::link($badgeurl, $badge->name);
     $userto = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
 
     $params = new stdClass();
@@ -167,6 +168,8 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
     $eventdata->userfrom          = $userfrom;
     $eventdata->userto            = $userto;
     $eventdata->notification      = 1;
+    $eventdata->contexturl        = $badgeurl;
+    $eventdata->contexturlname    = $badge->name;
     $eventdata->subject           = $badge->messagesubject;
     $eventdata->fullmessage       = $plaintext;
     $eventdata->fullmessageformat = FORMAT_HTML;
@@ -209,6 +212,8 @@ function badges_notify_badge_award(badge $badge, $userid, $issued, $filepathhash
         $eventdata->userfrom          = $userfrom;
         $eventdata->userto            = $creator;
         $eventdata->notification      = 1;
+        $eventdata->contexturl        = $badgeurl;
+        $eventdata->contexturlname    = $badge->name;
         $eventdata->subject           = $creatorsubject;
         $eventdata->fullmessage       = html_to_text($creatormessage);
         $eventdata->fullmessageformat = FORMAT_HTML;
@@ -881,7 +886,7 @@ function badges_open_badges_backpack_api(?int $backpackid = null) {
  *
  * @param int $id The backpack id.
  * @param int $userid The owner of the backpack, 0 if it's a sitewide backpack else a user's site backpack
- * @return array(stdClass)
+ * @return stdClass
  */
 function badges_get_site_backpack($id, int $userid = 0) {
     global $DB;
@@ -919,7 +924,7 @@ function badges_get_user_backpack(?int $userid = 0) {
 /**
  * Get the primary backpack for the site
  *
- * @return array(stdClass)
+ * @return stdClass
  */
 function badges_get_site_primary_backpack() {
     global $DB;

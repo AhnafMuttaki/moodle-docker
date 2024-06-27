@@ -248,7 +248,7 @@ function imscp_get_file_areas($course, $cm, $context) {
  *
  * @package  mod_imscp
  * @category files
- * @param stdClass $browser file browser
+ * @param file_browser $browser file browser
  * @param stdClass $areas file areas
  * @param stdClass $course course object
  * @param stdClass $cm course module object
@@ -392,7 +392,7 @@ function imscp_export_contents($cm, $baseurl) {
     $structure['fileurl']      = null;
     $structure['timecreated']  = $imscp->timemodified;
     $structure['timemodified'] = $imscp->timemodified;
-    $structure['content']      = json_encode(unserialize($imscp->structure));
+    $structure['content']      = json_encode(unserialize_array($imscp->structure));
     $structure['sortorder']    = 0;
     $structure['userid']       = null;
     $structure['author']       = null;

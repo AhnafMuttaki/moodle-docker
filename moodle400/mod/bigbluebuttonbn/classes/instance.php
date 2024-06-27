@@ -193,10 +193,20 @@ EOF;
      * @return null|self
      */
     public static function get_from_meetingid(string $meetingid): ?self {
+        global $DB;
+        // Here we try to manage cases where the meetingid was actually produced by the old plugin or we have actually
+        // changed the identifiers for the instance.
         $matches = self::parse_meetingid($meetingid);
+        $existinginstanceid = $DB->get_field('bigbluebuttonbn', 'id', ['meetingid' => $matches['meetingid']]);
+        if (empty($existinginstanceid)) {
+            debugging("The meeting id with ID ($meetingid) was not found in the bigbluebuttonbn table", DEBUG_DEVELOPER);
+            $existinginstanceid = $matches['instanceid']; // We try to "guess" the meeting id from its instance id. We should
+            // not really do that as this changes simply if we move the course elsewhere.
+            debugging("Trying to get the instanceid from the meeting ID. This will soon be deprecated", DEBUG_DEVELOPER);
+        }
+        $instance = self::get_from_instanceid($existinginstanceid);
 
-        $instance = self::get_from_instanceid($matches['instanceid']);
-
+        // Check for the group if any.
         if ($instance && array_key_exists('groupid', $matches)) {
             $instance->set_group_id($matches['groupid']);
         }
@@ -314,7 +324,7 @@ EOF;
             return get_string('allparticipants');
         }
 
-        return groups_get_group_name($groupid);
+        return format_string(groups_get_group_name($groupid), true, ['context' => $this->get_context()]);
     }
 
     /**
@@ -406,7 +416,7 @@ EOF;
      * Helper to get an instance var.
      *
      * @param string $name
-     * @return string
+     * @return mixed|null
      */
     public function get_instance_var(string $name) {
         $instance = $this->get_instance_data();
@@ -536,7 +546,6 @@ EOF;
      */
     public function get_user(): stdClass {
         global $USER;
-
         return $USER;
     }
 
@@ -547,8 +556,7 @@ EOF;
      */
     public function get_user_id(): int {
         $user = $this->get_user();
-
-        return $user->id;
+        return $user->id ?? 0;
     }
 
     /**
@@ -558,7 +566,6 @@ EOF;
      */
     public function get_user_fullname(): string {
         $user = $this->get_user();
-
         return fullname($user);
     }
 
@@ -726,6 +733,19 @@ EOF;
     }
 
     /**
+     * Get the appropriate designated role for the current user.
+     *
+     * @return string
+     */
+    public function get_current_user_role(): string {
+        if ($this->is_admin() || $this->is_moderator()) {
+            return 'MODERATOR';
+        }
+
+        return 'VIEWER';
+    }
+
+    /**
      * Whether to show the recording button
      *
      * @return bool
@@ -751,6 +771,16 @@ EOF;
     }
 
     /**
+     * Moderator approval required ?
+     *
+     * By default we leave it as false as "ALWAYS_ACCEPT" is the default value for
+     * the guestPolicy create parameter (https://docs.bigbluebutton.org/dev/api.html)
+     * @return bool
+     */
+    public function is_moderator_approval_required(): bool {
+        return $this->get_instance_var('mustapproveuser') ?? false;
+    }
+    /**
      * Whether this instance can import recordings from another instance.
      *
      * @return bool
@@ -759,8 +789,8 @@ EOF;
         if (!config::get('importrecordings_enabled')) {
             return false;
         }
-        if ($this->can_manage_recordings()) {
-            return true;
+        if (!$this->can_manage_recordings()) {
+            return false;
         }
 
         return $this->is_feature_enabled('importrecordings');
@@ -1014,6 +1044,8 @@ EOF;
         return new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
             'action' => 'logout',
             'id' => $this->cm->id,
+            'courseid' => $this->cm->course // Used to find the course if ever the activity is deleted
+            // while the meeting is running.
         ]);
     }
 
@@ -1105,7 +1137,7 @@ EOF;
      * @param bool $viewdeleted view deleted recordings ?
      * @return recording[]
      */
-    public function get_recordings(array $excludedid = [], $viewdeleted = false): array {
+    public function get_recordings(array $excludedid = [], bool $viewdeleted = false): array {
         // Fetch the list of recordings depending on the status of the instance.
         // show room is enabled for TYPE_ALL and TYPE_ROOM_ONLY.
         if ($this->is_feature_enabled('showroom')) {
@@ -1154,5 +1186,66 @@ EOF;
             }
         }
         return true;
+    }
+
+    /**
+     * Get current guest link url
+     *
+     * @return moodle_url
+     */
+    public function get_guest_access_url(): moodle_url {
+        $guestlinkuid = $this->get_instance_var('guestlinkuid');
+        if (empty($guestlinkuid)) {
+            $this->generate_guest_credentials();
+            $guestlinkuid = $this->get_instance_var('guestlinkuid');
+        }
+        return new moodle_url('/mod/bigbluebuttonbn/guest.php', ['uid' => $guestlinkuid]);
+    }
+
+    /**
+     * Is guest access allowed in this instance.
+     *
+     * @return bool
+     */
+    public function is_guest_allowed(): bool {
+        return !$this->is_type_recordings_only() &&
+                config::get('guestaccess_enabled') && $this->get_instance_var('guestallowed');
+    }
+
+    /**
+     * Get current meeting password
+     *
+     * @return string
+     */
+    public function get_guest_access_password() : string {
+        $guestpassword = $this->get_instance_var('guestpassword');
+        if (empty($guestpassword)) {
+            $this->generate_guest_credentials();
+            $guestpassword = $this->get_instance_var('guestpassword');
+        }
+        return $guestpassword;
+    }
+
+    /**
+     * Generate credentials for this instance and persist the value in the database
+     *
+     * @return void
+     */
+    private function generate_guest_credentials():void {
+        global $DB;
+        [$this->instancedata->guestlinkuid, $this->instancedata->guestpassword] =
+            \mod_bigbluebuttonbn\plugin::generate_guest_meeting_credentials();
+        $DB->update_record('bigbluebuttonbn', $this->instancedata);
+    }
+
+    /**
+     * Is this meeting configured to display avatars of the users ?
+     *
+     * Note: this is for now a global setting.
+     *
+     * @return bool
+     */
+    public function is_profile_picture_enabled(): bool {
+        return (bool) config::get('profile_picture_enabled');
     }
 }

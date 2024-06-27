@@ -289,6 +289,52 @@ abstract class question_bank {
     }
 
     /**
+     * Get all the versions of a particular question.
+     *
+     * @param int $questionid id of the question
+     * @return array The array keys are version number, and the values are objects with three int fields
+     * version (same as array key), versionid and questionid.
+     */
+    public static function get_all_versions_of_question(int $questionid): array {
+        global $DB;
+        $sql = "SELECT qv.id AS versionid, qv.version, qv.questionid
+                  FROM {question_versions} qv
+                 WHERE qv.questionbankentryid = (SELECT DISTINCT qbe.id
+                                                   FROM {question_bank_entries} qbe
+                                                   JOIN {question_versions} qv ON qbe.id = qv.questionbankentryid
+                                                   JOIN {question} q ON qv.questionid = q.id
+                                                  WHERE q.id = ?)
+              ORDER BY qv.version DESC";
+
+        return $DB->get_records_sql($sql, [$questionid]);
+    }
+
+    /**
+     * Get all the versions of questions.
+     *
+     * @param array $questionids Array of question ids.
+     * @return array two dimensional array question_bank_entries.id => version number => question.id.
+     *      Versions in descending order.
+     */
+    public static function get_all_versions_of_questions(array $questionids): array {
+        global $DB;
+
+        [$listquestionid, $params] = $DB->get_in_or_equal($questionids, SQL_PARAMS_NAMED);
+        $sql = "SELECT qv.questionid, qv.version, qv.questionbankentryid
+                  FROM {question_versions} qv
+                  JOIN {question_versions} qv2 ON qv.questionbankentryid = qv2.questionbankentryid
+                 WHERE qv2.questionid $listquestionid
+              ORDER BY qv.questionbankentryid, qv.version DESC";
+        $result = [];
+        $rows = $DB->get_recordset_sql($sql, $params);
+        foreach ($rows as $row) {
+            $result[$row->questionbankentryid][$row->version] = $row->questionid;
+        }
+
+        return $result;
+    }
+
+    /**
      * @return question_finder a question finder.
      */
     public static function get_finder() {
@@ -482,8 +528,8 @@ class question_finder implements cache_data_source {
 
     /**
      * Get the ids of all the questions in a list of categories.
-     * @param array $categoryids either a categoryid, or a comma-separated list
-     *      category ids, or an array of them.
+     * @param array $categoryids either a category id, or a comma-separated list
+     *      of category ids, or an array of them.
      * @param string $extraconditions extra conditions to AND with the rest of
      *      the where clause. Must use named parameters.
      * @param array $extraparams any parameters used by $extraconditions.
@@ -499,6 +545,7 @@ class question_finder implements cache_data_source {
             $extraconditions = ' AND (' . $extraconditions . ')';
         }
         $qcparams['readystatus'] = \core_question\local\bank\question_version_status::QUESTION_STATUS_READY;
+        $qcparams['readystatusqv'] = \core_question\local\bank\question_version_status::QUESTION_STATUS_READY;
         $sql = "SELECT q.id, q.id AS id2
                   FROM {question} q
                   JOIN {question_versions} qv ON qv.questionid = q.id
@@ -506,6 +553,12 @@ class question_finder implements cache_data_source {
                  WHERE qbe.questioncategoryid {$qcsql}
                        AND q.parent = 0
                        AND qv.status = :readystatus
+                       AND qv.version = (SELECT MAX(v.version)
+                                          FROM {question_versions} v
+                                          JOIN {question_bank_entries} be
+                                            ON be.id = v.questionbankentryid
+                                         WHERE be.id = qbe.id
+                                           AND v.status = :readystatusqv)
                        {$extraconditions}";
 
         return $DB->get_records_sql_menu($sql, $qcparams + $extraparams);
@@ -561,12 +614,10 @@ class question_finder implements cache_data_source {
         $from = $from . " " . $join;
         $where  = "qbe.questioncategoryid {$qcsql}
                AND q.parent = 0
-               AND qv.status = '$readystatus'
-               AND qv.version = (SELECT MAX(v.version)
+               AND qv.version = (SELECT MAX(version)
                                   FROM {question_versions} v
-                                  JOIN {question_bank_entries} be
-                                    ON be.id = v.questionbankentryid
-                                 WHERE be.id = qbe.id)";
+                                 WHERE questionbankentryid = qbe.id
+                                   AND status = '$readystatus')";
         $params = $qcparams;
 
         if (!empty($tagids)) {

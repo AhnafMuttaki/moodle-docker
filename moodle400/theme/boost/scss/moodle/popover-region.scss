@@ -5,8 +5,8 @@ $region-container-z-index: 1;
 $region-header-height: 25px;
 $region-footer-height: 30px;
 $content-item-hover-colour-bg: $primary;
-$content-item-hover-colour-text: #fff;
-$content-item-selected-colour-bg: #4f94cd;
+$content-item-hover-colour-text: $white;
+$content-item-selected-colour-bg: #3279b3;
 $content-item-unread-colour: #f4f4f4;
 $content-header-footer-height: $region-header-height + $region-footer-height;
 
@@ -178,6 +178,11 @@ $content-header-footer-height: $region-header-height + $region-footer-height;
         .icon {
             font-weight: bolder;
         }
+        .notification-image {
+            .icon {
+                font-weight: 400;
+            }
+        }
     }
 }
 
@@ -202,7 +207,7 @@ $content-header-footer-height: $region-header-height + $region-footer-height;
         font-size: 11px;
         line-height: 11px;
         position: absolute;
-        top: $navbar-height / 4;
+        top: $navbar-height * 0.25;
         right: 0;
     }
 

@@ -29,9 +29,6 @@ $courseindex-item-current: $primary !default;
                 color: $courseindex-link-hover-color;
             }
         }
-        &.draggable {
-            cursor: pointer;
-        }
     }
 }
 
@@ -134,6 +131,10 @@ $courseindex-item-current: $primary !default;
             &.completion_fail {
                 color: $danger;
             }
+        }
+
+        &.indented {
+            margin-left: map-get($spacers, 3);
         }
     }
 

@@ -487,7 +487,7 @@ class repository_type implements cacheable_object {
 /**
  * This is the base class of the repository class.
  *
- * To create repository plugin, see: {@link http://docs.moodle.org/dev/Repository_plugins}
+ * To create repository plugin, see: {@link https://moodledev.io/docs/apis/plugintypes/repository}
  * See an example: repository_dropbox
  *
  * @package   core_repository
@@ -519,7 +519,7 @@ abstract class repository implements cacheable_object {
     public $disabled = false;
     /** @var int repository instance id */
     public $id;
-    /** @var stdClass current context */
+    /** @var context current context */
     public $context;
     /** @var array repository options */
     public $options;
@@ -531,6 +531,10 @@ abstract class repository implements cacheable_object {
     public $instance;
     /** @var string Type of repository (webdav, google_docs, dropbox, ...). Read from $this->get_typename(). */
     protected $typename;
+    /** @var string instance name. */
+    public $name;
+    /** @var bool true if the super construct is called, otherwise false. */
+    public $super_called;
 
     /**
      * Constructor
@@ -1493,10 +1497,10 @@ abstract class repository implements cacheable_object {
         //if the context is SYSTEM, so we call it from administration page
         $admin = ($context->id == SYSCONTEXTID) ? true : false;
         if ($admin) {
-            $baseurl = new moodle_url('/'.$CFG->admin.'/repositoryinstance.php', array('sesskey'=>sesskey()));
+            $baseurl = new moodle_url('/admin/repositoryinstance.php');
             $output .= $OUTPUT->heading(get_string('siteinstances', 'repository'));
         } else {
-            $baseurl = new moodle_url('/repository/manage_instances.php', array('contextid'=>$context->id, 'sesskey'=>sesskey()));
+            $baseurl = new moodle_url('/repository/manage_instances.php', ['contextid' => $context->id]);
         }
 
         $namestr = get_string('name');
@@ -2168,7 +2172,7 @@ abstract class repository implements cacheable_object {
     /**
      * Given a path, and perhaps a search, get a list of files.
      *
-     * See details on {@link http://docs.moodle.org/dev/Repository_plugins}
+     * See details on {@link https://moodledev.io/docs/apis/plugintypes/repository}
      *
      * @param string $path this parameter can a folder name, or a identification of folder
      * @param string $page the page number of file list
@@ -2303,7 +2307,7 @@ abstract class repository implements cacheable_object {
      * format and stores formatted values.
      *
      * @param array|stdClass $listing result of get_listing() or search() or file_get_drafarea_files()
-     * @return array
+     * @return stdClass
      */
     public static function prepare_listing($listing) {
         $wasobject = false;
@@ -2421,7 +2425,7 @@ abstract class repository implements cacheable_object {
     /**
      * Edit/Create Admin Settings Moodle form
      *
-     * @param moodleform $mform Moodle form (passed by reference)
+     * @param MoodleQuickForm $mform Moodle form (passed by reference)
      * @param string $classname repository class name
      */
     public static function type_config_form($mform, $classname = 'repository') {
@@ -2886,6 +2890,10 @@ final class repository_instance_form extends moodleform {
     protected $instance;
     /** @var string repository plugin type */
     protected $plugin;
+    /** @var string repository type ID */
+    protected $typeid;
+    /** @var string repository context ID */
+    protected $contextid;
 
     /**
      * Added defaults to moodle form
@@ -3008,6 +3016,8 @@ final class repository_type_form extends moodleform {
     protected $plugin;
     /** @var string action */
     protected $action;
+    /** @var string plugin name */
+    protected $pluginname;
 
     /**
      * Definition of the moodleform
@@ -3108,12 +3118,12 @@ final class repository_type_form extends moodleform {
 /**
  * Generate all options needed by filepicker
  *
- * @param array $args including following keys
+ * @param stdClass $args including following keys
  *          context
  *          accepted_types
  *          return_types
  *
- * @return array the list of repository instances, including meta infomation, containing the following keys
+ * @return stdClass the list of repository instances, including meta infomation, containing the following keys
  *          externallink
  *          repositories
  *          accepted_types
@@ -3257,7 +3267,7 @@ function repository_delete_selected_files($context, string $component, string $f
  * @param string $filearea filearea
  * @param int $itemid the item id
  * @param array $files Array of files object with each item having filename/filepath as values
- * @return array $return Array of strings matching up to the parent directory of the deleted files
+ * @return false|stdClass $return Object containing URL of zip archive and a file path
  * @throws coding_exception
  */
 function repository_download_selected_files($context, string $component, string $filearea, $itemid, array $files) {
@@ -3274,10 +3284,6 @@ function repository_download_selected_files($context, string $component, string 
         $filename = $selectedfile->filename ? clean_filename($selectedfile->filename) : '.'; // Default to '.' for root.
         $filepath = clean_param($selectedfile->filepath, PARAM_PATH); // Default to '/' for downloadall.
         $filepath = file_correct_filepath($filepath);
-        $area = file_get_draft_area_info($itemid, $filepath);
-        if ($area['filecount'] == 0 && $area['foldercount'] == 0) {
-            continue;
-        }
 
         $storedfile = $fs->get_file($context->id, $component, $filearea, $itemid, $filepath, $filename);
         // If it is empty we are downloading a directory.
@@ -3291,16 +3297,16 @@ function repository_download_selected_files($context, string $component, string 
         $filestoarchive[$archivefile] = $storedfile;
     }
     $zippedfile = get_string('files') . '.zip';
-    if ($newfile =
-        $zipper->archive_to_storage(
+    if ($zipper->archive_to_storage(
             $filestoarchive,
             $context->id,
             $component,
             $filearea,
             $newdraftitemid,
             "/",
-            $zippedfile, $USER->id)
-    ) {
+            $zippedfile,
+            $USER->id,
+    )) {
         $return = new stdClass();
         $return->fileurl = moodle_url::make_draftfile_url($newdraftitemid, '/', $zippedfile)->out();
         $return->filepath = $filepath;

@@ -59,7 +59,7 @@ if (!isset($config->course)) {
 require_login($config->course, false);
 require_capability('moodle/course:manageactivities', context_course::instance($config->course));
 if (!get_config('tool_moodlenet', 'enablemoodlenet')) {
-    print_error('moodlenetnotenabled', 'tool_moodlenet');
+    throw new \moodle_exception('moodlenetnotenabled', 'tool_moodlenet');
 }
 
 // If the user cancelled, break early.
@@ -81,7 +81,7 @@ switch ($config->type) {
 }
 
 if ($import && $module) {
-    confirm_sesskey();
+    require_sesskey();
 
     $handlerinfo = $handlerregistry->get_resource_handler_for_mod_and_strategy($importinfo->get_resource(), $module, $strategy);
     if (is_null($handlerinfo)) {

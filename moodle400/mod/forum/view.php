@@ -45,7 +45,7 @@ $pagesize = optional_param('s', 0, PARAM_INT);
 $sortorder = optional_param('o', null, PARAM_INT);
 
 if (!$cmid && !$forumid) {
-    print_error('missingparameter');
+    throw new \moodle_exception('missingparameter');
 }
 
 if ($cmid) {
@@ -188,7 +188,7 @@ switch ($forum->get_type()) {
                 $groupid = groups_get_activity_group($cm, true) ?: null;
                 $gradeobj = (object) [
                     'contextid' => $forum->get_context()->id,
-                    'cmid' => $cmid,
+                    'cmid' => $forum->get_course_module_record()->id,
                     'name' => format_string($forum->get_name()),
                     'courseid' => $course->id,
                     'coursename' => format_string($course->shortname),
@@ -197,6 +197,7 @@ switch ($forum->get_type()) {
                     'gradingcomponent' => $forumgradeitem->get_grading_component_name(),
                     'gradingcomponentsubtype' => $forumgradeitem->get_grading_component_subtype(),
                     'sendstudentnotifications' => $forum->should_notify_students_default_when_grade_for_forum(),
+                    'gradeonlyactiveusers' => $forumgradeitem->should_grade_only_active_users(),
                 ];
                 echo $OUTPUT->render_from_template('mod_forum/grades/grade_button', $gradeobj);
             }
@@ -205,7 +206,7 @@ switch ($forum->get_type()) {
                 $groupid = groups_get_activity_group($cm, true) ?: null;
                 $gradeobj = (object) [
                     'contextid' => $forum->get_context()->id,
-                    'cmid' => $cmid,
+                    'cmid' => $forum->get_course_module_record()->id,
                     'name' => format_string($forum->get_name()),
                     'courseid' => $course->id,
                     'coursename' => format_string($course->shortname),

@@ -24,11 +24,13 @@
  * - Proxy handler: a private class to keep track of the state object changes.
  * - StateMap class: a private class extending Map class that triggers event when a state list is modifed.
  *
- * @module     core/local/reactive/stateManager
- * @class     core/local/reactive/stateManager
+ * @module     core/local/reactive/statemanager
+ * @class      StateManager
  * @copyright  2021 Ferran Recio <ferran@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+import Logger from 'core/local/reactive/logger';
 
 /**
  * State manager class.
@@ -120,6 +122,8 @@ export default class StateManager {
             };
             this.target.addEventListener('state:loaded', initialStateDone);
         });
+
+        this.logger = new Logger();
     }
 
     /**
@@ -441,6 +445,24 @@ export default class StateManager {
             }
             state[updateName] = fields;
         }
+    }
+
+    /**
+     * Set the logger class instance.
+     *
+     * Reactive instances can provide alternative loggers to provide advanced logging.
+     * @param {Logger} logger
+     */
+    setLogger(logger) {
+        this.logger = logger;
+    }
+
+    /**
+     * Add a new log entry into the reactive logger.
+     * @param {LoggerEntry} entry
+     */
+    addLoggerEntry(entry) {
+        this.logger.add(entry);
     }
 
     /**

@@ -16,6 +16,7 @@
 
 namespace core_adminpresets;
 
+use moodle_exception;
 use stdClass;
 
 /**
@@ -133,8 +134,8 @@ class manager_test extends \advanced_testcase {
         $settingpage = $adminroot->locate('modsettingquiz');
         $settingdata = $settingpage->settings->quizbrowsersecurity;;
         $result = $manager->get_setting($settingdata, '');
-        $this->assertInstanceOf('\mod_quiz\adminpresets\adminpresets_mod_quiz_admin_setting_browsersecurity', $result);
-        $this->assertNotEquals('core_adminpresets\local\setting\adminpresets_setting', get_class($result));
+        $this->assertInstanceOf(\mod_quiz\adminpresets\adminpresets_browser_security_setting::class, $result);
+        $this->assertNotEquals(\core_adminpresets\local\setting\adminpresets_setting::class, get_class($result));
 
         // Check the adminpresets_setting class is returned when no specific class exists.
         $settingpage = $adminroot->locate('managecustomfields');
@@ -599,8 +600,26 @@ class manager_test extends \advanced_testcase {
 
         $manager = new manager();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(moodle_exception::class);
+        $this->expectExceptionMessage('Error deleting from database');
         $manager->delete_preset($unexistingid);
+    }
+
+    /**
+     * Test trying to delete the core/pre-defined presets
+     *
+     * @covers ::delete_preset
+     */
+    public function test_delete_preset_core(): void {
+        global $DB;
+
+        $this->resetAfterTest();
+
+        $starterpreset = $DB->get_record('adminpresets', ['iscore' => manager::STARTER_PRESET]);
+
+        $this->expectException(moodle_exception::class);
+        $this->expectExceptionMessage('Error deleting from database');
+        (new manager())->delete_preset($starterpreset->id);
     }
 
     /**

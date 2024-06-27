@@ -283,7 +283,7 @@ class manager {
                 'title' => get_string('importtour', 'tool_usertours'),
             ],
             (object) [
-                'link'  => new \moodle_url('https://archive.moodle.net/tours'),
+                'link'  => new \moodle_url('https://moodle.net/search', ['q' => 'user tours']),
                 'linkproperties' => [
                         'target' => '_blank',
                     ],
@@ -867,7 +867,7 @@ class manager {
         // be increased if the tour has been updated.
         $shippedtours = [
             '40_tour_navigation_dashboard.json' => 4,
-            '40_tour_navigation_mycourse.json' => 4,
+            '40_tour_navigation_mycourse.json' => 5,
             '40_tour_navigation_course_teacher.json' => 3,
             '40_tour_navigation_course_student.json' => 3,
         ];

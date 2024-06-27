@@ -769,16 +769,19 @@ class base_test extends \advanced_testcase {
         $event4->trigger();
         $this->assertDebuggingNotCalled();
 
-        $event5 = \core_tests\event\problematic_event1::create(array('context'=>\context_system::instance(), 'other'=>(object)array('a'=>1)));
+        // Check the invalid content that cannot be converted to JSON will trigger debugging messages.
+        $event5 = \core_tests\event\problematic_event1::create(array('context' => \context_system::instance(), 'other' => [
+            'a' => NAN
+        ]));
         $this->assertDebuggingNotCalled();
         $event5->trigger();
         $this->assertDebuggingCalled();
 
+        // Check that moodle_url object does not trigger debugging messages.
         $url = new \moodle_url('/admin/');
         $event6 = \core_tests\event\problematic_event1::create(array('context'=>\context_system::instance(), 'other'=>array('a'=>$url)));
-        $this->assertDebuggingNotCalled();
         $event6->trigger();
-        $this->assertDebuggingCalled();
+        $this->assertDebuggingNotCalled();
 
         // Check that whole float numbers do not trigger debugging messages.
         $event7 = \core_tests\event\unittest_executed::create(array('context'=>\context_system::instance(),
@@ -848,27 +851,6 @@ class base_test extends \advanced_testcase {
         }
 
         $this->assertSame($event->get_data(), $data);
-    }
-
-    public function test_context_not_used() {
-        // TODO: MDL-69688 - This test is far away from my understanding. It throws a
-        // "Trying to get property 'instanceid' of non-object" notice, so
-        // it's not clear for me what the test is doing. This was detected
-        // when preparing tests for PHPUnit 8 (MDL-67673) and, at the end
-        // all that was done is to move the annotation (deprecated) to
-        // explicit expectation. Still try commenting it out and you'll see
-        // the notice.
-        if (PHP_VERSION_ID >= 80000) {
-            $this->expectWarning();
-        } else {
-            $this->expectNotice();
-        }
-        $event = \core_tests\event\context_used_in_event::create(array('other' => array('sample' => 1, 'xx' => 10)));
-        $this->assertEventContextNotUsed($event);
-
-        $eventcontext = phpunit_event_mock::testable_get_event_context($event);
-        phpunit_event_mock::testable_set_event_context($event, null);
-        $this->assertEventContextNotUsed($event);
     }
 
     /**

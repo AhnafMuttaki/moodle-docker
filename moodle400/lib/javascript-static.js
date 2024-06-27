@@ -704,11 +704,9 @@ YUI.add('moodle-core-io', function(Y) {
  * @return  {Number}    Number of pending items remaining after removing this item
  */
 M.util.js_complete = function(uniqid) {
-    // Use the Y.Array.indexOf instead of the native because some older browsers do not support
-    // the native function. Y.Array polyfills the native function if it does not exist.
-    var index = Y.Array.indexOf(M.util.pending_js, uniqid);
+    const index = M.util.pending_js.indexOf(uniqid);
     if (index >= 0) {
-        M.util.complete_js.push(M.util.pending_js.splice(index, 1));
+        M.util.complete_js.push(M.util.pending_js.splice(index, 1)[0]);
     } else {
         window.console.log("Unable to locate key for js_complete call", uniqid);
     }
@@ -726,7 +724,7 @@ M.util.js_complete = function(uniqid) {
  *
  * @param {String} identifier string identifier
  * @param {String} component the component providing the string
- * @param {Object|String} a optional variable to populate placeholder with
+ * @param {Object|String} [a] optional variable to populate placeholder with
  */
 M.util.get_string = function(identifier, component, a) {
     var stringvalue;

@@ -18,44 +18,19 @@
  * core_component related tests.
  *
  * @package    core
- * @category   phpunit
+ * @category   test
  * @copyright  2013 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @covers \core_component
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-
-/**
- * Class core_component_testcase.
- */
-class component_test extends advanced_testcase {
-
+final class component_test extends advanced_testcase {
     /**
      * To be changed if number of subsystems increases/decreases,
      * this is defined here to annoy devs that try to add more without any thinking,
      * always verify that it does not collide with any existing add-on modules and subplugins!!!
      */
-    const SUBSYSTEMCOUNT = 75;
-
-    public function setUp(): void {
-        $psr0namespaces = new ReflectionProperty('core_component', 'psr0namespaces');
-        $psr0namespaces->setAccessible(true);
-        $this->oldpsr0namespaces = $psr0namespaces->getValue(null);
-
-        $psr4namespaces = new ReflectionProperty('core_component', 'psr4namespaces');
-        $psr4namespaces->setAccessible(true);
-        $this->oldpsr4namespaces = $psr4namespaces->getValue(null);
-    }
-    public function tearDown(): void {
-        $psr0namespaces = new ReflectionProperty('core_component', 'psr0namespaces');
-        $psr0namespaces->setAccessible(true);
-        $psr0namespaces->setValue(null, $this->oldpsr0namespaces);
-
-        $psr4namespaces = new ReflectionProperty('core_component', 'psr4namespaces');
-        $psr4namespaces->setAccessible(true);
-        $psr4namespaces->setValue(null, $this->oldpsr4namespaces);
-    }
+    const SUBSYSTEMCOUNT = 76;
 
     public function test_get_core_subsystems() {
         global $CFG;
@@ -217,33 +192,58 @@ class component_test extends advanced_testcase {
         }
     }
 
-    public function test_is_valid_plugin_name() {
-        $this->assertTrue(core_component::is_valid_plugin_name('mod', 'example1'));
-        $this->assertTrue(core_component::is_valid_plugin_name('mod', 'feedback360'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'feedback_360'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', '2feedback'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', '1example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example.xx'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', '.example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', '_example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example_'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example_x1'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'example-x1'));
-        $this->assertFalse(core_component::is_valid_plugin_name('mod', 'role'));
+    /**
+     * Test that the get_plugin_list_with_file() function returns the correct list of plugins.
+     *
+     * @covers \core_component::is_valid_plugin_name
+     * @dataProvider is_valid_plugin_name_provider
+     * @param array $arguments
+     * @param bool $expected
+     */
+    public function test_is_valid_plugin_name(array $arguments, bool $expected): void {
+        $this->assertEquals($expected, core_component::is_valid_plugin_name(...$arguments));
+    }
 
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example1'));
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example_x1'));
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'example_x1_xxx'));
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'feedback360'));
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'feed_back360'));
-        $this->assertTrue(core_component::is_valid_plugin_name('tool', 'role'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', '1example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example.xx'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example-xx'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', '.example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', '_example'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example_'));
-        $this->assertFalse(core_component::is_valid_plugin_name('tool', 'example__x1'));
+    /**
+     * Data provider for the is_valid_plugin_name function.
+     *
+     * @return array
+     */
+    public function is_valid_plugin_name_provider(): array {
+        return [
+            [['mod', 'example1'], true],
+            [['mod', 'feedback360'], true],
+            [['mod', 'feedback_360'], false],
+            [['mod', '2feedback'], false],
+            [['mod', '1example'], false],
+            [['mod', 'example.xx'], false],
+            [['mod', '.example'], false],
+            [['mod', '_example'], false],
+            [['mod', 'example_'], false],
+            [['mod', 'example_x1'], false],
+            [['mod', 'example-x1'], false],
+            [['mod', 'role'], false],
+
+            [['tool', 'example1'], true],
+            [['tool', 'example_x1'], true],
+            [['tool', 'example_x1_xxx'], true],
+            [['tool', 'feedback360'], true],
+            [['tool', 'feed_back360'], true],
+            [['tool', 'role'], true],
+            [['tool', '1example'], false],
+            [['tool', 'example.xx'], false],
+            [['tool', 'example-xx'], false],
+            [['tool', '.example'], false],
+            [['tool', '_example'], false],
+            [['tool', 'example_'], false],
+            [['tool', 'example__x1'], false],
+
+            // Some invalid cases.
+            [['mod', null], false],
+            [['mod', ''], false],
+            [['tool', null], false],
+            [['tool', ''], false],
+        ];
     }
 
     public function test_normalize_componentname() {
@@ -473,8 +473,10 @@ class component_test extends advanced_testcase {
         $this->assertEquals(array(), array_keys($list));
     }
 
-    public function test_get_component_classes_in_namespace() {
-
+    /**
+     * Tests for get_component_classes_in_namespace.
+     */
+    public function test_get_component_classes_in_namespace(): void {
         // Unexisting.
         $this->assertCount(0, core_component::get_component_classes_in_namespace('core_unexistingcomponent', 'something'));
         $this->assertCount(0, core_component::get_component_classes_in_namespace('auth_cas', 'something'));
@@ -484,40 +486,125 @@ class component_test extends advanced_testcase {
         $this->assertCount(0, core_component::get_component_classes_in_namespace('core_user', 'course'));
         $this->assertCount(0, core_component::get_component_classes_in_namespace('mod_forum', 'output\\emaildigest'));
         $this->assertCount(0, core_component::get_component_classes_in_namespace('mod_forum', '\\output\\emaildigest'));
-        $this->assertCount(2, core_component::get_component_classes_in_namespace('mod_forum', 'output\\email'));
-        $this->assertCount(2, core_component::get_component_classes_in_namespace('mod_forum', '\\output\\email'));
-        $this->assertCount(2, core_component::get_component_classes_in_namespace('mod_forum', 'output\\email\\'));
-        $this->assertCount(2, core_component::get_component_classes_in_namespace('mod_forum', '\\output\\email\\'));
-
-        // Prefix with backslash if it doesn\'t come prefixed.
-        $this->assertCount(1, core_component::get_component_classes_in_namespace('auth_cas', 'task'));
-        $this->assertCount(1, core_component::get_component_classes_in_namespace('auth_cas', '\\task'));
-
-        // Core as a component works, the function can normalise the component name.
-        $this->assertCount(7, core_component::get_component_classes_in_namespace('core', 'update'));
-        $this->assertCount(7, core_component::get_component_classes_in_namespace('', 'update'));
-        $this->assertCount(7, core_component::get_component_classes_in_namespace('moodle', 'update'));
-
-        // Multiple levels.
-        $this->assertCount(5, core_component::get_component_classes_in_namespace('core_user', '\\output\\myprofile\\'));
-        $this->assertCount(5, core_component::get_component_classes_in_namespace('core_user', 'output\\myprofile\\'));
-        $this->assertCount(5, core_component::get_component_classes_in_namespace('core_user', '\\output\\myprofile'));
-        $this->assertCount(5, core_component::get_component_classes_in_namespace('core_user', 'output\\myprofile'));
-
-        // Without namespace it returns classes/ classes.
-        $this->assertCount(5, core_component::get_component_classes_in_namespace('tool_mobile', ''));
-        $this->assertCount(2, core_component::get_component_classes_in_namespace('tool_filetypes'));
-
-        // When no component is specified, classes are returned for the namespace in all components.
-        // (We don't assert exact amounts here as the count of `output` classes will change depending on plugins installed).
-        $this->assertGreaterThan(
-            count(\core_component::get_component_classes_in_namespace('core', 'output')),
-            count(\core_component::get_component_classes_in_namespace(null, 'output')));
 
         // Without either a component or namespace it returns an empty array.
         $this->assertEmpty(\core_component::get_component_classes_in_namespace());
         $this->assertEmpty(\core_component::get_component_classes_in_namespace(null));
         $this->assertEmpty(\core_component::get_component_classes_in_namespace(null, ''));
+    }
+
+    /**
+     * Test that the get_component_classes_in_namespace() function returns classes in the correct namespace.
+     *
+     * @dataProvider get_component_classes_in_namespace_provider
+     * @param array $methodargs
+     * @param string $expectedclassnameformat
+     */
+    public function test_get_component_classes_in_namespace_provider(
+        array $methodargs,
+        string $expectedclassnameformat,
+    ): void {
+        $classlist = core_component::get_component_classes_in_namespace(...$methodargs);
+        $this->assertGreaterThan(0, count($classlist));
+
+        foreach (array_keys($classlist) as $classname) {
+            $this->assertStringMatchesFormat($expectedclassnameformat, $classname);
+        }
+    }
+
+    /**
+     * Data provider for get_component_classes_in_namespace tests.
+     *
+     * @return array
+     */
+    public static function get_component_classes_in_namespace_provider(): array {
+        return [
+            // Matches the last namespace level name not partials.
+            [
+                ['mod_forum', 'output\\email'],
+                'mod_forum\output\email\%s',
+            ],
+            [
+                ['mod_forum', '\\output\\email'],
+                'mod_forum\output\email\%s',
+            ],
+            [
+                ['mod_forum', 'output\\email\\'],
+                'mod_forum\output\email\%s',
+            ],
+            [
+                ['mod_forum', '\\output\\email\\'],
+                'mod_forum\output\email\%s',
+            ],
+            // Prefix with backslash if it doesn\'t come prefixed.
+            [
+                ['auth_cas', 'task'],
+                'auth_cas\task\%s',
+            ],
+            [
+                ['auth_cas', '\\task'],
+                'auth_cas\task\%s',
+            ],
+
+            // Core as a component works, the function can normalise the component name.
+            [
+                ['core', 'update'],
+                'core\update\%s',
+            ],
+            [
+                ['', 'update'],
+                'core\update\%s',
+            ],
+            [
+                ['moodle', 'update'],
+                'core\update\%s',
+            ],
+
+            // Multiple levels.
+            [
+                ['core_user', '\\output\\myprofile\\'],
+                'core_user\output\myprofile\%s',
+            ],
+            [
+                ['core_user', 'output\\myprofile\\'],
+                'core_user\output\myprofile\%s',
+            ],
+            [
+                ['core_user', '\\output\\myprofile'],
+                'core_user\output\myprofile\%s',
+            ],
+            [
+                ['core_user', 'output\\myprofile'],
+                'core_user\output\myprofile\%s',
+            ],
+
+            // Without namespace it returns classes/ classes.
+            [
+                ['tool_mobile', ''],
+                'tool_mobile\%s',
+            ],
+            [
+                ['tool_filetypes'],
+                'tool_filetypes\%s',
+            ],
+
+            // Multiple levels.
+            [
+                ['core_user', '\\output\\myprofile\\'],
+                'core_user\output\myprofile\%s',
+            ],
+
+            // When no component is specified, classes are returned for the namespace in all components.
+            // (We don't assert exact amounts here as the count of `output` classes will change depending on plugins installed).
+            [
+                ['core', 'output'],
+                'core\%s',
+            ],
+            [
+                [null, 'output'],
+                '%s',
+            ],
+        ];
     }
 
     /**
@@ -600,6 +687,7 @@ class component_test extends advanced_testcase {
      * @param array $psr4 The PSR-4 namespaces to be used in the test.
      * @param string $classname The name of the class to attempt to load.
      * @param string $includedfiles The file expected to be loaded.
+     * @runInSeparateProcess
      */
     public function test_classloader($psr0, $psr4, $classname, $includedfiles) {
         $psr0namespaces = new ReflectionProperty('core_component', 'psr0namespaces');
@@ -629,7 +717,8 @@ class component_test extends advanced_testcase {
         // This is not in the spec, but may come up in some libraries using both namespaces and PEAR-style class names.
         // If problems arise we can remove this test, but will need to add a warning.
         // Normalise to forward slash for testing purposes.
-        $directory = str_replace('\\', '/', $CFG->dirroot) . "/lib/tests/fixtures/component/";
+        $dirroot = str_replace('\\', '/', $CFG->dirroot);
+        $directory = "{$dirroot}/lib/tests/fixtures/component/";
 
         $psr0 = [
           'psr0'      => 'lib/tests/fixtures/component/psr0',
@@ -700,6 +789,28 @@ class component_test extends advanced_testcase {
               'classname' => 'overlap_subnamespace_example2',
               'file' => "{$directory}overlap/subnamespace/example2.php",
           ],
+            'PSR-4 namespaces can come from multiple sources - first source' => [
+                'psr0' => $psr0,
+                'psr4' => [
+                    'Psr\\Http\\Message' => [
+                        'lib/psr/http-message/src',
+                        'lib/psr/http-factory/src',
+                    ],
+                ],
+                'classname' => 'Psr\Http\Message\ServerRequestInterface',
+                'includedfiles' => "{$dirroot}/lib/psr/http-message/src/ServerRequestInterface.php",
+            ],
+            'PSR-4 namespaces can come from multiple sources - second source' => [
+                'psr0' => [],
+                'psr4' => [
+                    'Psr\\Http\\Message' => [
+                        'lib/psr/http-message/src',
+                        'lib/psr/http-factory/src',
+                    ],
+                ],
+                'classname' => 'Psr\Http\Message\ServerRequestFactoryInterface',
+                'includedfiles' => "{$dirroot}/lib/psr/http-factory/src/ServerRequestFactoryInterface.php",
+            ],
         ];
     }
 
@@ -711,6 +822,7 @@ class component_test extends advanced_testcase {
      * @param array $psr4 The PSR-4 namespaces to be used in the test.
      * @param string $classname The name of the class to attempt to load.
      * @param string|bool $file The expected file corresponding to the class or false for nonexistant.
+     * @runInSeparateProcess
      */
     public function test_psr_classloader($psr0, $psr4, $classname, $file) {
         $psr0namespaces = new ReflectionProperty('core_component', 'psr0namespaces');
@@ -762,7 +874,7 @@ class component_test extends advanced_testcase {
               'separators' => ['\\'],
               'result' => $CFG->dirroot . "/test/src/Multiple/Namespaces.php",
           ],
-          'Getting a file with multiple namespaces' => [
+          'Getting a file with multiple namespaces (non-existent)' => [
               'classname' => 'Nonexistant\\Namespace\\Test',
               'prefix' => "Test",
               'path' => 'test/src',
@@ -842,5 +954,119 @@ class component_test extends advanced_testcase {
         $this->assertContains('mod_forum', $componentnames);
         $this->assertContains('tool_usertours', $componentnames);
         $this->assertContains('core_favourites', $componentnames);
+    }
+
+    /**
+     * Basic tests for APIs related functions in the core_component class.
+     */
+    public function test_apis_methods() {
+        $apis = core_component::get_core_apis();
+        $this->assertIsArray($apis);
+
+        $apinames = core_component::get_core_api_names();
+        $this->assertIsArray($apis);
+
+        // Both should return the very same APIs.
+        $this->assertEquals($apinames, array_keys($apis));
+
+        $this->assertFalse(core_component::is_core_api('lalala'));
+        $this->assertTrue(core_component::is_core_api('privacy'));
+    }
+
+    /**
+     * Test that the apis.json structure matches expectations
+     *
+     * While we include an apis.schema.json file in core, there isn't any PHP built-in allowing us
+     * to validate it (3rd part libraries needed). Plus the schema doesn't allow to validate things
+     * like uniqueness or sorting. We are going to do all that here.
+     */
+    public function test_apis_json_validation() {
+        $apis = $sortedapis = core_component::get_core_apis();
+        ksort($sortedapis); // We'll need this later.
+
+        $subsystems = core_component::get_core_subsystems(); // To verify all apis are pointing to valid subsystems.
+        $subsystems['core'] = 'anything'; // Let's add 'core' because it's a valid component for apis.
+
+        // General structure validations.
+        $this->assertIsArray($apis);
+        $this->assertGreaterThan(25, count($apis));
+        $this->assertArrayHasKey('privacy', $apis); // Verify a few.
+        $this->assertArrayHasKey('external', $apis);
+        $this->assertArrayHasKey('search', $apis);
+        $this->assertEquals(array_keys($sortedapis), array_keys($apis)); // Verify json is sorted alphabetically.
+
+        // Iterate over all apis and perform more validations.
+        foreach ($apis as $apiname => $attributes) {
+            // Message, to be used later and easier finding the problem.
+            $message = "Validation problem found with API: {$apiname}";
+
+            $this->assertIsObject($attributes, $message);
+            $this->assertMatchesRegularExpression('/^[a-z][a-z0-9]+$/', $apiname, $message);
+            $this->assertEquals(['component', 'allowedlevel2', 'allowedspread'], array_keys((array)$attributes), $message);
+
+            // Verify attributes.
+            if ($apiname !== 'core') { // Exception for core api, it doesn't have component.
+                // Check that component attribute looks correct.
+                $this->assertMatchesRegularExpression('/^(core|[a-z][a-z0-9_]+)$/', $attributes->component, $message);
+                // Ensure that the api component (without the core_ prefix) is a correct subsystem.
+                $this->assertArrayHasKey(str_replace('core_', '', $attributes->component), $subsystems, $message);
+            } else {
+                $this->assertNull($attributes->component, $message);
+            }
+
+
+            // Now check for the rest of attributes.
+            $this->assertIsBool($attributes->allowedlevel2, $message);
+            $this->assertIsBool($attributes->allowedspread, $message);
+
+            // Cannot spread if level2 is not allowed.
+            $this->assertLessThanOrEqual($attributes->allowedlevel2, $attributes->allowedspread, $message);
+        }
+    }
+
+    /**
+     * Test for monologo icons check in plugins.
+     *
+     * @covers core_component::has_monologo_icon
+     * @return void
+     */
+    public function test_has_monologo_icon(): void {
+        // The Forum activity plugin has monologo icons.
+        $this->assertTrue(core_component::has_monologo_icon('mod', 'forum'));
+        // The core H5P subsystem doesn't have monologo icons.
+        $this->assertFalse(core_component::has_monologo_icon('core', 'h5p'));
+        // The function will return false for a non-existent component.
+        $this->assertFalse(core_component::has_monologo_icon('randomcomponent', 'h5p'));
+    }
+
+    /*
+     * Tests the getter for the db directory summary hash.
+     *
+     * @covers \core_component::get_all_directory_hashes
+     */
+    public function test_get_db_directories_hash() {
+        $initial = \core_component::get_all_component_hash();
+
+        $dir = make_request_directory();
+        $hashes = \core_component::get_all_directory_hashes([$dir]);
+        $emptydirhash = \core_component::get_all_component_hash([$hashes]);
+
+        // Confirm that a single empty directory is a different hash to the core hash.
+        $this->assertNotEquals($initial, $emptydirhash);
+
+        // Now lets add something to the dir, and check the hash is different.
+        $file = fopen($dir . '/test.php', 'w');
+        fwrite($file, 'sometestdata');
+        fclose($file);
+
+        $hashes = \core_component::get_all_directory_hashes([$dir]);
+        $onefiledirhash = \core_component::get_all_component_hash([$hashes]);
+        $this->assertNotEquals($emptydirhash, $onefiledirhash);
+
+        // Now add a subdirectory inside the request dir. This should not affect the hash.
+        mkdir($dir . '/subdir');
+        $hashes = \core_component::get_all_directory_hashes([$dir]);
+        $finalhash = \core_component::get_all_component_hash([$hashes]);
+        $this->assertEquals($onefiledirhash, $finalhash);
     }
 }

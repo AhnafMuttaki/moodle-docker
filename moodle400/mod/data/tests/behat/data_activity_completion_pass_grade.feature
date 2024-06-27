@@ -12,28 +12,20 @@ Feature: Completion pass grade
       | student2 | Vinnie    | Student2 | student2@example.com |
       | teacher1 | Darrell   | Teacher1 | teacher1@example.com |
     And the following "courses" exist:
-      | fullname | shortname | category |
-      | Course 1 | C1        | 0        |
+      | fullname | shortname | category | enablecompletion |
+      | Course 1 | C1        | 0        | 1                |
     And the following "course enrolments" exist:
       | user     | course | role           |
       | student1 | C1     | student        |
       | student2 | C1     | student        |
       | teacher1 | C1     | editingteacher |
-    And I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    And I navigate to "Settings" in current page administration
-    And I expand all fieldsets
-    And I set the following fields to these values:
-      | Enable completion tracking | Yes |
-      | Show activity completion conditions | Yes |
-    And I press "Save and display"
     And the following "activity" exists:
       | activity | data          |
       | course   | C1            |
       | idnumber | mh1           |
       | name     | Music history |
       | section  | 1             |
-    And I am on the "Music history" "data activity" page
+    And I am on the "Music history" "data activity" page logged in as teacher1
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
@@ -50,14 +42,15 @@ Feature: Completion pass grade
     And I press "Save and display"
     And I add a "Short text" field to "Music history" database and I fill the form with:
       | Field name | Instrument types |
-    And I navigate to "Templates" in current page administration
-    And I press "Save template"
     And I log out
 
+  @javascript
   Scenario: View automatic completion items as a teacher
-    Given I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    When I follow "Music history"
+    Given I am on the "Music history" "data activity" page logged in as teacher1
+#   We add an entry to let the user change to a different view.
+    When I add an entry to "Music history" database with:
+      | Instrument types | Drums |
+    And I press "Save"
     Then "Music history" should have the "View" completion condition
     And "Music history" should have the "Make entries: 2" completion condition
     And "Music history" should have the "Receive a grade" completion condition

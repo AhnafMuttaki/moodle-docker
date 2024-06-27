@@ -21,7 +21,6 @@ namespace core_reportbuilder\table;
 use context;
 use moodle_url;
 use renderable;
-use table_default_export_format_parent;
 use table_sql;
 use html_writer;
 use core_table\dynamic;
@@ -30,7 +29,6 @@ use core_reportbuilder\local\filters\base;
 use core_reportbuilder\local\models\report;
 use core_reportbuilder\local\report\base as base_report;
 use core_reportbuilder\local\report\filter;
-use core_reportbuilder\output\dataformat_export_format;
 use core\output\notification;
 
 defined('MOODLE_INTERNAL') || die;
@@ -151,14 +149,11 @@ abstract class base_report_table extends table_sql implements dynamic, renderabl
     }
 
     /**
-     * Override parent method of the same, to make use of a recordset and avoid issues with duplicate values in the first column
+     * Generate suitable SQL for the table
      *
-     * @param int $pagesize
-     * @param bool $useinitialsbar
+     * @return string
      */
-    public function query_db($pagesize, $useinitialsbar = true) {
-        global $DB;
-
+    protected function get_table_sql(): string {
         $sql = "SELECT {$this->sql->fields} FROM {$this->sql->from} WHERE {$this->sql->where} {$this->groupbysql}";
 
         $sort = $this->get_sql_sort();
@@ -166,17 +161,34 @@ abstract class base_report_table extends table_sql implements dynamic, renderabl
             $sql .= " ORDER BY {$sort}";
         }
 
+        return $sql;
+    }
+
+    /**
+     * Override parent method of the same, to make use of a recordset and avoid issues with duplicate values in the first column
+     *
+     * @param int $pagesize
+     * @param bool $useinitialsbar
+     */
+    public function query_db($pagesize, $useinitialsbar = true): void {
+        global $DB;
+
         if (!$this->is_downloading()) {
             $this->pagesize($pagesize, $DB->count_records_sql($this->countsql, $this->countparams));
 
-            $this->rawdata = $DB->get_recordset_sql($sql, $this->sql->params, $this->get_page_start(), $this->get_page_size());
+            $this->rawdata = $DB->get_recordset_sql($this->get_table_sql(), $this->sql->params, $this->get_page_start(),
+                $this->get_page_size());
         } else {
-            $this->rawdata = $DB->get_recordset_sql($sql, $this->sql->params);
+            $this->rawdata = $DB->get_recordset_sql($this->get_table_sql(), $this->sql->params);
         }
     }
 
     /**
      * Override parent method of the same, to ensure that any columns with custom sort fields are accounted for
+     *
+     * Because the base table_sql has "special" handling of fullname columns {@see table_sql::contains_fullname_columns}, we need
+     * to handle that here to ensure that any that are being sorted take priority over reportbuilders own aliases of the same
+     * columns. This prevents them appearing multiple times in a query, which SQL Server really doesn't like
      *
      * @return string
      */
@@ -184,8 +196,14 @@ abstract class base_report_table extends table_sql implements dynamic, renderabl
         $columnsbyalias = $this->report->get_active_columns_by_alias();
         $columnsortby = [];
 
+        // First pass over sorted columns, to extract all the fullname fields from table_sql.
+        $sortedcolumns = $this->get_sort_columns();
+        $sortedcolumnsfullname = array_filter($sortedcolumns, static function(string $alias): bool {
+            return !preg_match('/^c[\d]+_/', $alias);
+        }, ARRAY_FILTER_USE_KEY);
+
         // Iterate over all sorted report columns, replace with columns own fields if applicable.
-        foreach ($this->get_sort_columns() as $alias => $order) {
+        foreach ($sortedcolumns as $alias => $order) {
             $column = $columnsbyalias[$alias] ?? null;
 
             // If the column is not being aggregated and defines custom sort fields, then use them.
@@ -200,24 +218,15 @@ abstract class base_report_table extends table_sql implements dynamic, renderabl
             }
         }
 
-        return static::construct_order_by($columnsortby);
-    }
-
-    /**
-     * Set the export class to use when downloading reports (TODO: consider applying to all tables, MDL-72058)
-     *
-     * @param table_default_export_format_parent|null $exportclass
-     * @return table_default_export_format_parent|null
-     */
-    public function export_class_instance($exportclass = null) {
-        if (is_null($this->exportclass) && $this->is_downloading()) {
-            $this->exportclass = new dataformat_export_format($this, $this->download);
-            if (!$this->exportclass->document_started()) {
-                $this->exportclass->start_document($this->filename, $this->sheettitle);
+        // Now ensure that any fullname sorted columns have duplicated aliases removed.
+        $columnsortby = array_filter($columnsortby, static function(string $alias) use ($sortedcolumnsfullname): bool {
+            if (preg_match('/^c[\d]+_(?<column>.*)$/', $alias, $matches)) {
+                return !array_key_exists($matches['column'], $sortedcolumnsfullname);
             }
-        }
+            return true;
+        }, ARRAY_FILTER_USE_KEY);
 
-        return $this->exportclass;
+        return static::construct_order_by($columnsortby);
     }
 
     /**
@@ -262,7 +271,9 @@ abstract class base_report_table extends table_sql implements dynamic, renderabl
 
         $this->wrap_html_start();
 
+        $this->set_caption($this->report::get_name(), ['class' => 'sr-only']);
+
         echo html_writer::start_tag('div');
-        echo html_writer::start_tag('table', $this->attributes);
+        echo html_writer::start_tag('table', $this->attributes) . $this->render_caption();
     }
 }

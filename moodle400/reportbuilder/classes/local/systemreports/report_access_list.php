@@ -24,6 +24,7 @@ use core_reportbuilder\permission;
 use core_reportbuilder\system_report;
 use core_reportbuilder\local\entities\user;
 use core_reportbuilder\local\helpers\audience as audience_helper;
+use core_user\fields;
 
 /**
  * Report access list
@@ -40,25 +41,26 @@ class report_access_list extends system_report {
     protected function initialise(): void {
         $userentity = new user();
         $userentityalias = $userentity->get_table_alias('user');
+
         $this->set_main_table('user', $userentityalias);
         $this->add_entity($userentity);
 
-        $reportid = $this->get_parameter('id', 0, PARAM_INT);
-
         // Find users allowed to view the report thru the report audiences.
-        [$wheres, $params] = self::get_users_by_audience_sql($reportid, $userentityalias);
+        $audiences = audience::get_records(['reportid' => $this->get_parameter('id', 0, PARAM_INT)]);
+        [$wheres, $params] = audience_helper::user_audience_sql($audiences, $userentityalias);
 
-        if (!empty($wheres)) {
-            // Wrap each OR condition into brackets.
-            $allwheres = '(' . implode(') OR (', $wheres) . ')';
+        if (count($wheres) > 0) {
+            $select = '(' . implode(' OR ', $wheres) . ')';
         } else {
-            $allwheres = "1=0";
+            $select = "1=0";
         }
 
-        $this->add_base_condition_sql("($allwheres)", $params);
+        $this->add_base_condition_sql($select, $params);
+        $this->add_base_condition_simple("{$userentityalias}.deleted", 0);
 
-        $this->add_column_from_entity('user:fullnamewithpicturelink');
-        $this->add_filter_from_entity('user:fullname');
+        $this->add_columns();
+        $this->add_filters();
+
         $this->set_downloadable(false);
     }
 
@@ -69,21 +71,38 @@ class report_access_list extends system_report {
      */
     protected function can_view(): bool {
         $reportid = $this->get_parameter('id', 0, PARAM_INT);
-        $report = report::get_record(['id' => $reportid]);
+        $report = report::get_record(['id' => $reportid], MUST_EXIST);
 
-        return $report && permission::can_edit_report($report);
+        return permission::can_edit_report($report);
     }
 
     /**
-     * Find users who can access this report based on the audience and add them to the report.
-     *
-     * @param int $reportid
-     * @param string $usertablealias
-     * @return array
+     * Add columns to report
      */
-    protected static function get_users_by_audience_sql(int $reportid, string $usertablealias): array {
-        $audiences = audience::get_records(['reportid' => $reportid]);
+    protected function add_columns(): void {
+        $userentity = $this->get_entity('user');
+        $this->add_column($userentity->get_column('fullnamewithpicturelink'));
 
-        return audience_helper::user_audience_sql($audiences, $usertablealias);
+        // Include all identity field columns.
+        $identityfields = fields::for_identity($this->get_context(), true)->get_required_fields();
+        foreach ($identityfields as $identityfield) {
+            $this->add_column($userentity->get_identity_column($identityfield));
+        }
+
+        $this->set_initial_sort_column('user:fullnamewithpicturelink', SORT_ASC);
+    }
+
+    /**
+     * Add filters to report
+     */
+    protected function add_filters(): void {
+        $userentity = $this->get_entity('user');
+        $this->add_filter($userentity->get_filter('fullname'));
+
+        // Include all identity field filters.
+        $identityfields = fields::for_identity($this->get_context(), true)->get_required_fields();
+        foreach ($identityfields as $identityfield) {
+            $this->add_filter($userentity->get_identity_filter($identityfield));
+        }
     }
 }

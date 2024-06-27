@@ -32,23 +32,41 @@ class data_field_checkbox extends data_field_base {
      */
     protected static $priority = self::LOW_PRIORITY;
 
-    function display_add_field($recordid = 0, $formdata = null) {
-        global $CFG, $DB, $OUTPUT;
+    public function supports_preview(): bool {
+        return true;
+    }
 
-        $content = array();
+    public function get_data_content_preview(int $recordid): stdClass {
+        $options = explode("\n", $this->field->param1);
+        $options = array_map('trim', $options);
+        $selected = $options[$recordid % count($options)];
+        return (object)[
+            'id' => 0,
+            'fieldid' => $this->field->id,
+            'recordid' => $recordid,
+            'content' => $selected,
+            'content1' => null,
+            'content2' => null,
+            'content3' => null,
+            'content4' => null,
+        ];
+    }
+
+    function display_add_field($recordid = 0, $formdata = null) {
+        global $DB, $OUTPUT;
 
         if ($formdata) {
             $fieldname = 'field_' . $this->field->id;
-            $content = $formdata->$fieldname;
+            $content = $formdata->$fieldname ?? [];
         } else if ($recordid) {
-            $content = $DB->get_field('data_content', 'content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid));
-            $content = explode('##', $content);
+            $content = $DB->get_field('data_content', 'content', ['fieldid' => $this->field->id, 'recordid' => $recordid]);
+            $content = explode('##', $content ?? '');
         } else {
-            $content = array();
+            $content = [];
         }
 
         $str = '<div title="' . s($this->field->description) . '">';
-        $str .= '<fieldset><legend><span class="accesshide">'.$this->field->name;
+        $str .= '<fieldset><legend><span class="accesshide">'.s($this->field->name);
         if ($this->field->required) {
             $str .= '$nbsp;' . get_string('requiredelement', 'form');
             $str .= '</span></legend>';
@@ -188,28 +206,24 @@ class data_field_checkbox extends data_field_base {
     }
 
     function display_browse_field($recordid, $template) {
-        global $DB;
-
-        if ($content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
-            if (strval($content->content) === '') {
-                return false;
-            }
-
-            $options = explode("\n",$this->field->param1);
-            $options = array_map('trim', $options);
-
-            $contentArr = explode('##', $content->content);
-            $str = '';
-            foreach ($contentArr as $line) {
-                if (!in_array($line, $options)) {
-                    // hmm, looks like somebody edited the field definition
-                    continue;
-                }
-                $str .= $line . "<br />\n";
-            }
-            return $str;
+        $content = $this->get_data_content($recordid);
+        if (!$content || empty($content->content)) {
+            return '';
         }
-        return false;
+
+        $options = explode("\n", $this->field->param1);
+        $options = array_map('trim', $options);
+
+        $contentarray = explode('##', $content->content);
+        $str = '';
+        foreach ($contentarray as $line) {
+            if (!in_array($line, $options)) {
+                // Hmm, looks like somebody edited the field definition.
+                continue;
+            }
+            $str .= $line . "<br />\n";
+        }
+        return $str;
     }
 
     function format_data_field_checkbox_content($content) {

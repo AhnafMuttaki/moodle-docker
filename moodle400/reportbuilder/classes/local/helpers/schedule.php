@@ -19,16 +19,15 @@ declare(strict_types=1);
 namespace core_reportbuilder\local\helpers;
 
 use context_user;
-use core_plugin_manager;
 use core_user;
 use invalid_parameter_exception;
 use stdClass;
 use stored_file;
+use table_dataformat_export_format;
 use core\message\message;
 use core\plugininfo\dataformat;
 use core_reportbuilder\local\models\audience as audience_model;
 use core_reportbuilder\local\models\schedule as model;
-use core_reportbuilder\output\dataformat_export_format;
 use core_reportbuilder\table\custom_report_table_view;
 
 /**
@@ -44,13 +43,14 @@ class schedule {
      * Create report schedule, calculate when it should be next sent
      *
      * @param stdClass $data
+     * @param int|null $timenow Time to use as comparison against current date (defaults to current time)
      * @return model
      */
-    public static function create_schedule(stdClass $data): model {
+    public static function create_schedule(stdClass $data, ?int $timenow = null): model {
         $data->name = trim($data->name);
 
         $schedule = (new model(0, $data));
-        $schedule->set('timenextsend', self::calculate_next_send_time($schedule));
+        $schedule->set('timenextsend', self::calculate_next_send_time($schedule, $timenow));
 
         return $schedule->create();
     }
@@ -111,19 +111,21 @@ class schedule {
         $audienceids = (array) json_decode($schedule->get('audiences'));
 
         // Retrieve all selected audience records for the schedule.
-        [$audienceselect, $audienceparams] = $DB->get_in_or_equal($audienceids, SQL_PARAMS_NAMED, 'aid', true, true);
+        [$audienceselect, $audienceparams] = $DB->get_in_or_equal($audienceids, SQL_PARAMS_NAMED, 'aid', true, null);
         $audiences = audience_model::get_records_select("id {$audienceselect}", $audienceparams);
-        if (count($audiences) === 0) {
-            return [];
-        }
 
         // Now convert audiences to SQL for user retrieval.
         [$wheres, $params] = audience::user_audience_sql($audiences);
+        if (count($wheres) === 0) {
+            return [];
+        }
+
         [$userorder] = users_order_by_sql('u');
 
         $sql = 'SELECT u.*
                   FROM {user} u
-                 WHERE ' . implode(' OR ', $wheres) . '
+                 WHERE (' . implode(' OR ', $wheres) . ')
+                   AND u.deleted = 0
               ORDER BY ' . $userorder;
 
         return $DB->get_records_sql($sql, $params);
@@ -151,7 +153,8 @@ class schedule {
      * @return stored_file
      */
     public static function get_schedule_report_file(model $schedule): stored_file {
-        global $CFG;
+        global $CFG, $USER;
+
         require_once("{$CFG->libdir}/filelib.php");
 
         $table = custom_report_table_view::create($schedule->get('reportid'));
@@ -163,13 +166,12 @@ class schedule {
         // cleaned in order to instantiate export class without exception).
         ob_start();
         $table->download = $schedule->get('format');
-        $exportclass = new dataformat_export_format($table, $table->download);
+        $exportclass = new table_dataformat_export_format($table, $table->download);
         ob_end_clean();
 
-        // Create our schedule report stored file.
-        $context = context_user::instance($schedule->get('usercreated'));
+        // Create our schedule report stored file temporarily in user draft.
         $filerecord = [
-            'contextid' => $context->id,
+            'contextid' => context_user::instance($USER->id)->id,
             'component' => 'user',
             'filearea' => 'draft',
             'itemid' => file_get_unused_draft_itemid(),
@@ -180,11 +182,14 @@ class schedule {
         $storedfile = \core\dataformat::write_data_to_filearea(
             $filerecord,
             $table->download,
-            $table->headers,
+            $exportclass->format_data($table->headers),
             $table->rawdata,
-            static function(stdClass $record) use ($table, $exportclass): array {
+            static function(stdClass $record, bool $supportshtml) use ($table, $exportclass): array {
                 $record = $table->format_row($record);
-                return $exportclass->format_data($record);
+                if (!$supportshtml) {
+                    $record = $exportclass->format_data($record);
+                }
+                return $record;
             }
         );
 
@@ -226,7 +231,7 @@ class schedule {
      * returned value is after the current date
      *
      * @param model $schedule
-     * @param int|null $timenow Time to use for calculation (defaults to current time)
+     * @param int|null $timenow Time to use as comparison against current date (defaults to current time)
      * @return int
      */
     public static function calculate_next_send_time(model $schedule, ?int $timenow = null): int {
@@ -342,10 +347,10 @@ class schedule {
      * @return string[]
      */
     public static function get_format_options(): array {
-        $dataformats = core_plugin_manager::instance()->get_plugins_of_type('dataformat');
+        $dataformats = dataformat::get_enabled_plugins();
 
-        return array_map(static function(dataformat $dataformat): string {
-            return $dataformat->displayname;
+        return array_map(static function(string $pluginname): string {
+            return get_string('dataformat', 'dataformat_' . $pluginname);
         }, $dataformats);
     }
 

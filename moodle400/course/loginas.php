@@ -20,10 +20,10 @@ if (\core\session\manager::is_loggedinas()) {
 }
 
 if ($redirect) {
-    if ($id and $id != SITEID) {
+    if ($id && $id != SITEID) {
         $SESSION->wantsurl = "$CFG->wwwroot/course/view.php?id=".$id;
     } else {
-        $SESSION->wantsurl = "$CFG->wwwroot/";
+        $SESSION->wantsurl = "$CFG->wwwroot/?redirect=1";
     }
 
     redirect(get_login_url());
@@ -44,7 +44,7 @@ require_login();
 
 if (has_capability('moodle/user:loginas', $systemcontext)) {
     if (is_siteadmin($userid)) {
-        print_error('nologinas');
+        throw new \moodle_exception('nologinas');
     }
     $context = $systemcontext;
     $PAGE->set_context($context);
@@ -52,10 +52,10 @@ if (has_capability('moodle/user:loginas', $systemcontext)) {
     require_login($course);
     require_capability('moodle/user:loginas', $coursecontext);
     if (is_siteadmin($userid)) {
-        print_error('nologinas');
+        throw new \moodle_exception('nologinas');
     }
     if (!is_enrolled($coursecontext, $userid)) {
-        print_error('usernotincourse');
+        throw new \moodle_exception('usernotincourse');
     }
     $context = $coursecontext;
 
@@ -72,7 +72,7 @@ if (has_capability('moodle/user:loginas', $systemcontext)) {
             }
         }
         if (!$samegroup) {
-            print_error('nologinas');
+            throw new \moodle_exception('nologinas');
         }
     }
 }
@@ -90,4 +90,11 @@ $strloggedinas = get_string('loggedinas', '', $newfullname);
 $PAGE->set_title($strloggedinas);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($strloggedinas);
-notice($strloggedinas, "$CFG->wwwroot/course/view.php?id=$course->id");
+
+if ($course->id != SITEID) {
+    $returnurl = course_get_url($course);
+} else {
+    $returnurl = new moodle_url('/', ['redirect' => 1]);
+}
+
+notice($strloggedinas, $returnurl);

@@ -269,6 +269,7 @@ body.path-question-type {
 .que span.qno {
     font-size: 1.5em;
     font-weight: bold;
+    word-break: break-word;
 }
 
 .que .info > div {
@@ -333,7 +334,8 @@ body.path-question-type {
     }
 }
 
-.path-mod-quiz input[size] {
+.que input[size],
+.que textarea[cols] {
     width: auto;
     max-width: 100%;
 }

@@ -26,7 +26,6 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir . '/externallib.php');
 
 $serviceshortname  = required_param('service',  PARAM_ALPHANUMEXT);
 $passport          = required_param('passport',  PARAM_RAW);    // Passport send from the app to validate the response URL.
@@ -57,8 +56,9 @@ if (!empty($oauthsso) && is_enabled_auth('oauth2')) {
 
 // Check if the plugin is properly configured.
 $typeoflogin = get_config('tool_mobile', 'typeoflogin');
-if (empty($SESSION->justloggedin) and
-        $typeoflogin != tool_mobile\api::LOGIN_VIA_BROWSER and
+if (empty($SESSION->justloggedin) &&
+        !is_enabled_auth('oauth2') &&
+        $typeoflogin != tool_mobile\api::LOGIN_VIA_BROWSER &&
         $typeoflogin != tool_mobile\api::LOGIN_VIA_EMBEDDED_BROWSER) {
     throw new moodle_exception('pluginnotenabledorconfigured', 'tool_mobile');
 }
@@ -69,6 +69,14 @@ if (empty($service)) {
     throw new moodle_exception('servicenotavailable', 'webservice');
 }
 
+// If the user is using the inapp (embedded) browser, we need to set the Secure and Partitioned attributes to the session cookie.
+if (\core_useragent::is_moodle_app()) {
+    \core\session\utility\cookie_helper::add_attributes_to_cookie_response_header(
+        cookiename: "MoodleSession{$CFG->sessioncookie}",
+        attributes: ['Secure', 'Partitioned'],
+    );
+}
+
 require_login(0, false);
 
 // Require an active user: not guest, not suspended.
@@ -76,9 +84,9 @@ core_user::require_active_user($USER);
 
 // Get an existing token or create a new one.
 $timenow = time();
-$token = external_generate_token_for_current_user($service);
+$token = \core_external\util::generate_token_for_current_user($service);
 $privatetoken = $token->privatetoken;
-external_log_token_request($token);
+\core_external\util::log_token_request($token);
 
 // Don't return the private token if the user didn't just log in and a new token wasn't created.
 if (empty($SESSION->justloggedin) and $token->timecreated < $timenow) {

@@ -65,7 +65,7 @@ export default class Component extends BaseComponent {
      * @return {Component}
      */
     static init(target, selectors) {
-        return new Component({
+        return new this({
             element: document.getElementById(target),
             reactive: getCurrentCourseEditor(),
             selectors,
@@ -131,9 +131,16 @@ export default class Component extends BaseComponent {
             const toggler = section.querySelector(this.selectors.COLLAPSE);
             const isCollapsed = toggler?.classList.contains(this.classes.COLLAPSED) ?? false;
 
-            if (isChevron || isCollapsed) {
-                // Update the state.
-                const sectionId = section.getAttribute('data-id');
+            // Update the state.
+            const sectionId = section.getAttribute('data-id');
+            if ((!sectionlink)) {
+                this.reactive.dispatch(
+                    'sectionIndexCollapsed',
+                    [sectionId],
+                    !isCollapsed
+                );
+            } else if (isCollapsed) {
+                // Always expand the section when clicking on section name.
                 this.reactive.dispatch(
                     'sectionIndexCollapsed',
                     [sectionId],
@@ -328,7 +335,7 @@ export default class Component extends BaseComponent {
                 container.append(item);
                 return;
             }
-            if (currentitem !== item) {
+            if (currentitem !== item && item) {
                 container.insertBefore(item, currentitem);
             }
         });
