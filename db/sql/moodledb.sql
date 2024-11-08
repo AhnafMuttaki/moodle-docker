@@ -1,2 +1,2 @@
-CREATE DATABASE moodle;
+CREATE DATABASE IF NOT EXISTS moodle;
 use moodle;

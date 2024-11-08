@@ -1,0 +1,1107 @@
+2024-10-28 12:07:28,544 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:07:28,545 INFO supervisord started with pid 1
+2024-10-28 12:07:29,550 INFO spawned: 'cron' with pid 7
+2024-10-28 12:07:29,553 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:07:29,555 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:07:29,556 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:07:29,773 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:07:30,774 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:07:30,777 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:07:30,777 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:07:30,778 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:07:30,875 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:07:32,880 INFO spawned: 'moodle-cron' with pid 15
+2024-10-28 12:07:32,983 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:07:35,989 INFO spawned: 'moodle-cron' with pid 16
+2024-10-28 12:07:36,091 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:07:37,092 INFO gave up: moodle-cron entered FATAL state, too many start retries too quickly
+2024-10-28 12:08:32,614 WARN received SIGQUIT indicating exit request
+2024-10-28 12:08:32,615 INFO waiting for cron, nginx, php-fpm to die
+2024-10-28 12:08:33,627 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:08:33,629 INFO stopped: nginx (exit status 0)
+2024-10-28 12:08:34,630 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:08:48,185 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:08:48,187 INFO supervisord started with pid 1
+2024-10-28 12:08:49,191 INFO spawned: 'cron' with pid 7
+2024-10-28 12:08:49,194 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:08:49,198 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:08:49,199 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:08:49,300 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:08:50,301 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:08:50,304 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:08:50,305 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:08:50,305 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:08:50,420 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:08:52,426 INFO spawned: 'moodle-cron' with pid 15
+2024-10-28 12:08:52,524 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:08:55,528 INFO spawned: 'moodle-cron' with pid 16
+2024-10-28 12:08:55,620 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:08:56,254 INFO gave up: moodle-cron entered FATAL state, too many start retries too quickly
+2024-10-28 12:17:10,519 WARN received SIGQUIT indicating exit request
+2024-10-28 12:17:10,522 INFO waiting for cron, nginx, php-fpm to die
+2024-10-28 12:17:10,554 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:17:10,556 INFO stopped: nginx (exit status 0)
+2024-10-28 12:17:11,558 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:17:12,184 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:17:12,185 INFO supervisord started with pid 1
+2024-10-28 12:17:13,188 INFO spawned: 'cron' with pid 7
+2024-10-28 12:17:13,192 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:17:13,195 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:17:13,198 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:17:14,195 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:17:14,195 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:17:14,195 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:17:14,215 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:20:13,532 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:20:14,538 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:20:15,700 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:23:14,104 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:23:15,109 INFO spawned: 'moodle-cron' with pid 15
+2024-10-28 12:23:16,386 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:23:24,478 WARN received SIGQUIT indicating exit request
+2024-10-28 12:23:24,479 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 12:23:24,502 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:23:24,505 INFO stopped: nginx (exit status 0)
+2024-10-28 12:23:25,515 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 12:23:25,515 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:23:26,249 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:23:26,251 INFO supervisord started with pid 1
+2024-10-28 12:23:27,255 INFO spawned: 'cron' with pid 7
+2024-10-28 12:23:27,259 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:23:27,262 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:23:27,263 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:23:28,429 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:23:28,429 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:23:28,429 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:23:28,429 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:26:27,789 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:26:28,795 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:26:29,997 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:26:38,085 WARN received SIGQUIT indicating exit request
+2024-10-28 12:26:38,086 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 12:26:38,107 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:26:38,110 INFO stopped: nginx (exit status 0)
+2024-10-28 12:26:39,120 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 12:26:39,121 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:26:41,704 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:26:41,705 INFO supervisord started with pid 1
+2024-10-28 12:26:42,708 INFO spawned: 'cron' with pid 7
+2024-10-28 12:26:42,709 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:26:42,711 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:26:42,713 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:26:42,781 WARN exited: moodle-cron (exit status 1; not expected)
+2024-10-28 12:26:43,782 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:26:43,785 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:26:43,785 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:26:43,786 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:26:44,984 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:29:26,125 WARN received SIGQUIT indicating exit request
+2024-10-28 12:29:26,127 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 12:29:26,140 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:29:26,143 INFO stopped: nginx (exit status 0)
+2024-10-28 12:29:26,154 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 12:29:26,154 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:29:26,846 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:29:26,848 INFO supervisord started with pid 1
+2024-10-28 12:29:27,852 INFO spawned: 'cron' with pid 7
+2024-10-28 12:29:27,856 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:29:27,858 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:29:27,861 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:29:29,016 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:29:29,016 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:29:29,016 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:29:29,016 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:32:06,509 WARN received SIGQUIT indicating exit request
+2024-10-28 12:32:06,511 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 12:32:06,525 INFO stopped: php-fpm (exit status 0)
+2024-10-28 12:32:06,527 INFO stopped: nginx (exit status 0)
+2024-10-28 12:32:07,540 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 12:32:07,541 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 12:32:08,163 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 12:32:08,164 INFO supervisord started with pid 1
+2024-10-28 12:32:09,169 INFO spawned: 'cron' with pid 7
+2024-10-28 12:32:09,172 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 12:32:09,175 INFO spawned: 'nginx' with pid 9
+2024-10-28 12:32:09,177 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 12:32:10,337 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:32:10,337 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:32:10,337 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:32:10,337 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:35:09,057 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:35:10,062 INFO spawned: 'moodle-cron' with pid 14
+2024-10-28 12:35:11,217 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:38:10,853 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:38:11,857 INFO spawned: 'moodle-cron' with pid 15
+2024-10-28 12:38:13,011 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:41:11,831 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:41:12,836 INFO spawned: 'moodle-cron' with pid 16
+2024-10-28 12:41:13,997 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:44:12,722 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:44:13,726 INFO spawned: 'moodle-cron' with pid 17
+2024-10-28 12:44:14,880 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:47:13,647 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:47:14,651 INFO spawned: 'moodle-cron' with pid 18
+2024-10-28 12:47:15,808 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:50:14,786 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:50:15,791 INFO spawned: 'moodle-cron' with pid 19
+2024-10-28 12:50:16,945 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:53:15,589 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:53:16,593 INFO spawned: 'moodle-cron' with pid 20
+2024-10-28 12:53:17,744 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:56:16,522 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:56:17,526 INFO spawned: 'moodle-cron' with pid 21
+2024-10-28 12:56:18,679 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 12:59:17,204 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 12:59:18,208 INFO spawned: 'moodle-cron' with pid 22
+2024-10-28 12:59:19,364 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:02:19,040 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:02:20,048 INFO spawned: 'moodle-cron' with pid 23
+2024-10-28 13:02:21,248 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:05:20,920 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:05:21,924 INFO spawned: 'moodle-cron' with pid 24
+2024-10-28 13:05:23,104 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:05:23,104 WARN received SIGQUIT indicating exit request
+2024-10-28 13:05:23,105 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 13:05:23,132 INFO stopped: php-fpm (exit status 0)
+2024-10-28 13:05:23,134 INFO stopped: nginx (exit status 0)
+2024-10-28 13:05:24,140 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 13:05:24,141 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 13:05:24,920 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 13:05:24,922 INFO supervisord started with pid 1
+2024-10-28 13:05:25,925 INFO spawned: 'cron' with pid 7
+2024-10-28 13:05:25,927 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 13:05:25,929 INFO spawned: 'nginx' with pid 9
+2024-10-28 13:05:25,930 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 13:05:27,095 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:05:27,096 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:05:27,096 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:05:27,096 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:08:26,499 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:08:27,503 INFO spawned: 'moodle-cron' with pid 19
+2024-10-28 13:08:28,665 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:11:27,687 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:11:28,691 INFO spawned: 'moodle-cron' with pid 20
+2024-10-28 13:11:29,852 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:14:28,347 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:14:29,351 INFO spawned: 'moodle-cron' with pid 21
+2024-10-28 13:14:30,545 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:15:13,619 WARN received SIGQUIT indicating exit request
+2024-10-28 13:15:13,620 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 13:15:13,651 INFO stopped: php-fpm (exit status 0)
+2024-10-28 13:15:13,653 INFO stopped: nginx (exit status 0)
+2024-10-28 13:15:14,664 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 13:15:14,665 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 13:15:15,444 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 13:15:15,446 INFO supervisord started with pid 1
+2024-10-28 13:15:16,450 INFO spawned: 'cron' with pid 7
+2024-10-28 13:15:16,454 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 13:15:16,455 INFO spawned: 'nginx' with pid 9
+2024-10-28 13:15:16,457 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 13:15:17,623 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:15:17,623 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:15:17,623 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:15:17,623 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:17:47,302 WARN received SIGQUIT indicating exit request
+2024-10-28 13:17:47,303 INFO waiting for cron, moodle-cron, nginx, php-fpm to die
+2024-10-28 13:17:47,328 INFO stopped: php-fpm (exit status 0)
+2024-10-28 13:17:47,330 INFO stopped: nginx (exit status 0)
+2024-10-28 13:17:48,344 WARN stopped: moodle-cron (terminated by SIGTERM)
+2024-10-28 13:17:48,345 WARN stopped: cron (terminated by SIGTERM)
+2024-10-28 13:17:49,069 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-10-28 13:17:49,070 INFO supervisord started with pid 1
+2024-10-28 13:17:50,075 INFO spawned: 'cron' with pid 7
+2024-10-28 13:17:50,078 INFO spawned: 'moodle-cron' with pid 8
+2024-10-28 13:17:50,081 INFO spawned: 'nginx' with pid 9
+2024-10-28 13:17:50,083 INFO spawned: 'php-fpm' with pid 10
+2024-10-28 13:17:51,239 INFO success: cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:17:51,239 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:17:51,239 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:17:51,239 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:20:50,783 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:20:51,787 INFO spawned: 'moodle-cron' with pid 15
+2024-10-28 13:20:52,944 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:23:51,586 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:23:52,590 INFO spawned: 'moodle-cron' with pid 16
+2024-10-28 13:23:53,739 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:26:52,516 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:26:53,520 INFO spawned: 'moodle-cron' with pid 17
+2024-10-28 13:26:54,680 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:29:53,286 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:29:54,290 INFO spawned: 'moodle-cron' with pid 18
+2024-10-28 13:29:55,447 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:32:54,422 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:32:55,426 INFO spawned: 'moodle-cron' with pid 19
+2024-10-28 13:32:56,578 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:35:55,334 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:35:56,339 INFO spawned: 'moodle-cron' with pid 20
+2024-10-28 13:35:57,488 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:38:56,054 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:38:57,058 INFO spawned: 'moodle-cron' with pid 21
+2024-10-28 13:38:58,205 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:41:57,023 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:41:58,027 INFO spawned: 'moodle-cron' with pid 22
+2024-10-28 13:41:59,185 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:44:58,901 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:44:59,906 INFO spawned: 'moodle-cron' with pid 23
+2024-10-28 13:45:01,057 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:48:00,788 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:48:01,793 INFO spawned: 'moodle-cron' with pid 24
+2024-10-28 13:48:03,409 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:51:02,265 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:51:03,269 INFO spawned: 'moodle-cron' with pid 25
+2024-10-28 13:51:04,427 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:54:03,130 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:54:04,134 INFO spawned: 'moodle-cron' with pid 26
+2024-10-28 13:54:05,285 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 13:57:04,023 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 13:57:05,028 INFO spawned: 'moodle-cron' with pid 27
+2024-10-28 13:57:06,193 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 14:00:05,140 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 14:00:06,144 INFO spawned: 'moodle-cron' with pid 28
+2024-10-28 14:00:07,290 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 14:03:06,958 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 14:03:07,962 INFO spawned: 'moodle-cron' with pid 29
+2024-10-28 14:03:09,116 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 14:06:08,896 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 14:06:09,901 INFO spawned: 'moodle-cron' with pid 30
+2024-10-28 14:06:11,056 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 14:09:10,710 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 14:09:11,714 INFO spawned: 'moodle-cron' with pid 31
+2024-10-28 14:09:12,863 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 14:39:51,059 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 14:39:52,063 INFO spawned: 'moodle-cron' with pid 32
+2024-10-28 14:39:53,243 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 15:42:20,554 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 15:42:21,559 INFO spawned: 'moodle-cron' with pid 33
+2024-10-28 15:42:22,727 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 16:44:06,157 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 16:44:07,162 INFO spawned: 'moodle-cron' with pid 34
+2024-10-28 16:44:08,331 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 17:46:27,145 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 17:46:28,150 INFO spawned: 'moodle-cron' with pid 35
+2024-10-28 17:46:29,317 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 18:48:00,754 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 18:48:01,758 INFO spawned: 'moodle-cron' with pid 36
+2024-10-28 18:48:03,333 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 19:49:22,694 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 19:49:23,699 INFO spawned: 'moodle-cron' with pid 37
+2024-10-28 19:49:24,859 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 20:50:20,663 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 20:50:21,668 INFO spawned: 'moodle-cron' with pid 38
+2024-10-28 20:50:22,843 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 21:51:21,683 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 21:51:22,688 INFO spawned: 'moodle-cron' with pid 39
+2024-10-28 21:51:23,857 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 22:52:20,615 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 22:52:21,620 INFO spawned: 'moodle-cron' with pid 40
+2024-10-28 22:52:22,788 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-28 23:53:21,685 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-28 23:53:22,689 INFO spawned: 'moodle-cron' with pid 41
+2024-10-28 23:53:23,864 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 00:54:23,048 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 00:54:24,053 INFO spawned: 'moodle-cron' with pid 42
+2024-10-29 00:54:25,223 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 01:43:49,330 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 01:43:50,336 INFO spawned: 'moodle-cron' with pid 43
+2024-10-29 01:43:51,510 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 02:42:56,967 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 02:42:57,972 INFO spawned: 'moodle-cron' with pid 44
+2024-10-29 02:42:59,139 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 03:42:56,727 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 03:42:57,732 INFO spawned: 'moodle-cron' with pid 45
+2024-10-29 03:42:58,909 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 04:44:25,678 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 04:44:26,683 INFO spawned: 'moodle-cron' with pid 50
+2024-10-29 04:44:27,853 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:42:39,211 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:42:40,215 INFO spawned: 'moodle-cron' with pid 51
+2024-10-29 05:42:41,376 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:45:40,346 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:45:41,350 INFO spawned: 'moodle-cron' with pid 52
+2024-10-29 05:45:42,514 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:48:41,403 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:48:42,407 INFO spawned: 'moodle-cron' with pid 53
+2024-10-29 05:48:43,570 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:51:42,761 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:51:43,765 INFO spawned: 'moodle-cron' with pid 54
+2024-10-29 05:51:44,924 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:54:43,757 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:54:44,762 INFO spawned: 'moodle-cron' with pid 55
+2024-10-29 05:54:45,914 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 05:57:44,919 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 05:57:45,923 INFO spawned: 'moodle-cron' with pid 56
+2024-10-29 05:57:47,081 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:00:46,102 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:00:47,107 INFO spawned: 'moodle-cron' with pid 57
+2024-10-29 06:00:48,309 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:03:47,847 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:03:48,851 INFO spawned: 'moodle-cron' with pid 58
+2024-10-29 06:03:50,025 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:06:48,838 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:06:49,842 INFO spawned: 'moodle-cron' with pid 59
+2024-10-29 06:06:51,006 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:09:49,730 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:09:50,735 INFO spawned: 'moodle-cron' with pid 60
+2024-10-29 06:09:51,894 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:12:50,069 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:12:51,074 INFO spawned: 'moodle-cron' with pid 61
+2024-10-29 06:12:52,237 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:15:51,203 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:15:52,207 INFO spawned: 'moodle-cron' with pid 62
+2024-10-29 06:15:53,364 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:18:52,786 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:18:53,789 INFO spawned: 'moodle-cron' with pid 66
+2024-10-29 06:18:54,945 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:21:53,044 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:21:54,047 INFO spawned: 'moodle-cron' with pid 67
+2024-10-29 06:21:55,199 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:24:54,402 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:24:55,406 INFO spawned: 'moodle-cron' with pid 68
+2024-10-29 06:24:56,561 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:27:55,618 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:27:56,622 INFO spawned: 'moodle-cron' with pid 80
+2024-10-29 06:27:57,774 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:30:56,855 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:30:57,860 INFO spawned: 'moodle-cron' with pid 81
+2024-10-29 06:30:59,033 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:33:57,642 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:33:58,646 INFO spawned: 'moodle-cron' with pid 82
+2024-10-29 06:33:59,808 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:36:58,672 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:36:59,676 INFO spawned: 'moodle-cron' with pid 83
+2024-10-29 06:37:00,835 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:39:59,504 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:40:00,507 INFO spawned: 'moodle-cron' with pid 84
+2024-10-29 06:40:01,680 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:43:00,612 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:43:01,616 INFO spawned: 'moodle-cron' with pid 85
+2024-10-29 06:43:03,335 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:46:01,995 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:46:02,999 INFO spawned: 'moodle-cron' with pid 86
+2024-10-29 06:46:04,158 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:49:03,810 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:49:04,814 INFO spawned: 'moodle-cron' with pid 87
+2024-10-29 06:49:05,983 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:52:04,057 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:52:05,061 INFO spawned: 'moodle-cron' with pid 88
+2024-10-29 06:52:06,222 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:55:05,300 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:55:06,305 INFO spawned: 'moodle-cron' with pid 202
+2024-10-29 06:55:07,456 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 06:58:06,290 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 06:58:07,295 INFO spawned: 'moodle-cron' with pid 203
+2024-10-29 06:58:08,445 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:01:07,676 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:01:08,680 INFO spawned: 'moodle-cron' with pid 204
+2024-10-29 07:01:09,833 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:04:08,666 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:04:09,670 INFO spawned: 'moodle-cron' with pid 205
+2024-10-29 07:04:10,831 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:07:09,829 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:07:10,833 INFO spawned: 'moodle-cron' with pid 206
+2024-10-29 07:07:11,989 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:10:10,162 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:10:11,166 INFO spawned: 'moodle-cron' with pid 207
+2024-10-29 07:10:12,326 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:13:11,186 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:13:12,189 INFO spawned: 'moodle-cron' with pid 208
+2024-10-29 07:13:13,342 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:16:12,302 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:16:13,307 INFO spawned: 'moodle-cron' with pid 209
+2024-10-29 07:16:14,472 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:19:13,334 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:19:14,338 INFO spawned: 'moodle-cron' with pid 213
+2024-10-29 07:19:15,488 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:22:14,576 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:22:15,581 INFO spawned: 'moodle-cron' with pid 214
+2024-10-29 07:22:16,732 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:25:15,747 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:25:16,751 INFO spawned: 'moodle-cron' with pid 215
+2024-10-29 07:25:17,902 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:28:16,722 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:28:17,727 INFO spawned: 'moodle-cron' with pid 216
+2024-10-29 07:28:18,889 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:31:17,036 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:31:18,040 INFO spawned: 'moodle-cron' with pid 217
+2024-10-29 07:31:19,209 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:34:18,057 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:34:19,061 INFO spawned: 'moodle-cron' with pid 218
+2024-10-29 07:34:20,223 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:37:19,306 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:37:20,311 INFO spawned: 'moodle-cron' with pid 219
+2024-10-29 07:37:21,471 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:40:20,589 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:40:21,593 INFO spawned: 'moodle-cron' with pid 220
+2024-10-29 07:40:22,743 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:43:21,660 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:43:22,664 INFO spawned: 'moodle-cron' with pid 221
+2024-10-29 07:43:23,821 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:46:22,837 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:46:23,841 INFO spawned: 'moodle-cron' with pid 222
+2024-10-29 07:46:24,998 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:49:23,850 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:49:24,855 INFO spawned: 'moodle-cron' with pid 223
+2024-10-29 07:49:26,017 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:52:24,193 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:52:25,197 INFO spawned: 'moodle-cron' with pid 224
+2024-10-29 07:52:26,353 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:55:25,367 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:55:26,370 INFO spawned: 'moodle-cron' with pid 225
+2024-10-29 07:55:27,517 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 07:58:26,201 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 07:58:27,204 INFO spawned: 'moodle-cron' with pid 226
+2024-10-29 07:58:28,369 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:01:27,299 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:01:28,302 INFO spawned: 'moodle-cron' with pid 227
+2024-10-29 08:01:29,469 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:04:28,119 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:04:29,122 INFO spawned: 'moodle-cron' with pid 228
+2024-10-29 08:04:30,289 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:07:29,535 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:07:30,539 INFO spawned: 'moodle-cron' with pid 229
+2024-10-29 08:07:31,695 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:10:30,789 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:10:31,794 INFO spawned: 'moodle-cron' with pid 230
+2024-10-29 08:10:32,951 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:13:31,861 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:13:32,865 INFO spawned: 'moodle-cron' with pid 231
+2024-10-29 08:13:34,019 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:16:32,884 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:16:33,888 INFO spawned: 'moodle-cron' with pid 232
+2024-10-29 08:16:35,043 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:19:33,922 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:19:34,926 INFO spawned: 'moodle-cron' with pid 236
+2024-10-29 08:19:36,081 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:22:35,123 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:22:36,128 INFO spawned: 'moodle-cron' with pid 237
+2024-10-29 08:22:37,291 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:25:36,302 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:25:37,306 INFO spawned: 'moodle-cron' with pid 238
+2024-10-29 08:25:38,459 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:28:37,267 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:28:38,271 INFO spawned: 'moodle-cron' with pid 239
+2024-10-29 08:28:39,422 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:31:38,635 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:31:39,640 INFO spawned: 'moodle-cron' with pid 240
+2024-10-29 08:31:40,797 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:34:39,666 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:34:40,670 INFO spawned: 'moodle-cron' with pid 241
+2024-10-29 08:34:41,813 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:37:41,007 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:37:42,012 INFO spawned: 'moodle-cron' with pid 242
+2024-10-29 08:37:43,170 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:40:42,259 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:40:43,263 INFO spawned: 'moodle-cron' with pid 243
+2024-10-29 08:40:44,429 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:43:43,335 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:43:44,340 INFO spawned: 'moodle-cron' with pid 244
+2024-10-29 08:43:45,494 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:46:44,724 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:46:45,729 INFO spawned: 'moodle-cron' with pid 245
+2024-10-29 08:46:46,893 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:49:45,485 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:49:46,490 INFO spawned: 'moodle-cron' with pid 246
+2024-10-29 08:49:47,649 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:52:46,807 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:52:47,812 INFO spawned: 'moodle-cron' with pid 247
+2024-10-29 08:52:48,973 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:55:48,016 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:55:49,021 INFO spawned: 'moodle-cron' with pid 248
+2024-10-29 08:55:50,178 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 08:58:49,061 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 08:58:50,066 INFO spawned: 'moodle-cron' with pid 249
+2024-10-29 08:58:51,221 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:01:50,420 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:01:51,424 INFO spawned: 'moodle-cron' with pid 250
+2024-10-29 09:01:52,594 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:04:51,418 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:04:52,421 INFO spawned: 'moodle-cron' with pid 251
+2024-10-29 09:04:53,569 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:07:52,607 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:07:53,611 INFO spawned: 'moodle-cron' with pid 252
+2024-10-29 09:07:54,765 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:10:53,952 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:10:54,956 INFO spawned: 'moodle-cron' with pid 253
+2024-10-29 09:10:56,122 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:13:56,019 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:13:57,024 INFO spawned: 'moodle-cron' with pid 254
+2024-10-29 09:13:58,179 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:16:57,203 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:16:58,208 INFO spawned: 'moodle-cron' with pid 255
+2024-10-29 09:16:59,362 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:19:58,114 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:19:59,118 INFO spawned: 'moodle-cron' with pid 259
+2024-10-29 09:20:00,273 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:22:59,360 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:23:00,364 INFO spawned: 'moodle-cron' with pid 260
+2024-10-29 09:23:01,519 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:26:00,541 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:26:01,545 INFO spawned: 'moodle-cron' with pid 261
+2024-10-29 09:26:03,191 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:29:01,994 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:29:02,998 INFO spawned: 'moodle-cron' with pid 262
+2024-10-29 09:29:04,165 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:32:03,377 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:32:04,382 INFO spawned: 'moodle-cron' with pid 263
+2024-10-29 09:32:05,543 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:35:04,571 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:35:05,576 INFO spawned: 'moodle-cron' with pid 264
+2024-10-29 09:35:06,735 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:38:05,630 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:38:06,635 INFO spawned: 'moodle-cron' with pid 265
+2024-10-29 09:38:07,789 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:41:06,923 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:41:07,927 INFO spawned: 'moodle-cron' with pid 266
+2024-10-29 09:41:09,089 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:44:08,991 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:44:09,996 INFO spawned: 'moodle-cron' with pid 267
+2024-10-29 09:44:11,159 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:47:10,155 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:47:11,159 INFO spawned: 'moodle-cron' with pid 268
+2024-10-29 09:47:12,322 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:50:11,494 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:50:12,498 INFO spawned: 'moodle-cron' with pid 269
+2024-10-29 09:50:13,649 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:53:12,523 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:53:13,528 INFO spawned: 'moodle-cron' with pid 270
+2024-10-29 09:53:14,691 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:56:13,655 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:56:14,659 INFO spawned: 'moodle-cron' with pid 271
+2024-10-29 09:56:15,817 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 09:59:14,706 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 09:59:15,711 INFO spawned: 'moodle-cron' with pid 272
+2024-10-29 09:59:16,864 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:02:15,177 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:02:16,181 INFO spawned: 'moodle-cron' with pid 273
+2024-10-29 10:02:17,333 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:05:16,363 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:05:17,367 INFO spawned: 'moodle-cron' with pid 274
+2024-10-29 10:05:18,523 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:08:17,404 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:08:18,409 INFO spawned: 'moodle-cron' with pid 275
+2024-10-29 10:08:19,561 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:11:18,733 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:11:19,737 INFO spawned: 'moodle-cron' with pid 276
+2024-10-29 10:11:20,891 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:14:19,726 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:14:20,730 INFO spawned: 'moodle-cron' with pid 277
+2024-10-29 10:14:21,889 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:17:20,899 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:17:21,904 INFO spawned: 'moodle-cron' with pid 281
+2024-10-29 10:17:23,063 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:20:22,183 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:20:23,187 INFO spawned: 'moodle-cron' with pid 282
+2024-10-29 10:20:24,353 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:23:23,268 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:23:24,272 INFO spawned: 'moodle-cron' with pid 283
+2024-10-29 10:23:25,429 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:26:24,468 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:26:25,472 INFO spawned: 'moodle-cron' with pid 284
+2024-10-29 10:26:26,631 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:29:25,478 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:29:26,483 INFO spawned: 'moodle-cron' with pid 285
+2024-10-29 10:29:27,644 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:32:26,843 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:32:27,848 INFO spawned: 'moodle-cron' with pid 286
+2024-10-29 10:32:29,000 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:35:27,990 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:35:28,995 INFO spawned: 'moodle-cron' with pid 287
+2024-10-29 10:35:30,158 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:38:30,013 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:38:31,018 INFO spawned: 'moodle-cron' with pid 288
+2024-10-29 10:38:32,165 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:41:31,297 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:41:32,301 INFO spawned: 'moodle-cron' with pid 289
+2024-10-29 10:41:33,454 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:44:32,408 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:44:33,412 INFO spawned: 'moodle-cron' with pid 290
+2024-10-29 10:44:34,576 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:47:33,603 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:47:34,607 INFO spawned: 'moodle-cron' with pid 291
+2024-10-29 10:47:35,764 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:50:34,965 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:50:35,969 INFO spawned: 'moodle-cron' with pid 292
+2024-10-29 10:50:37,130 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:53:37,010 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:53:38,014 INFO spawned: 'moodle-cron' with pid 293
+2024-10-29 10:53:39,182 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:56:38,171 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:56:39,175 INFO spawned: 'moodle-cron' with pid 294
+2024-10-29 10:56:40,343 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 10:59:39,202 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 10:59:40,206 INFO spawned: 'moodle-cron' with pid 295
+2024-10-29 10:59:41,355 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:02:40,506 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:02:41,511 INFO spawned: 'moodle-cron' with pid 296
+2024-10-29 11:02:42,679 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:05:41,426 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:05:42,430 INFO spawned: 'moodle-cron' with pid 297
+2024-10-29 11:05:43,593 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:08:42,245 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:08:43,249 INFO spawned: 'moodle-cron' with pid 298
+2024-10-29 11:08:44,409 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:11:43,494 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:11:44,497 INFO spawned: 'moodle-cron' with pid 299
+2024-10-29 11:11:45,658 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:14:44,353 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:14:45,357 INFO spawned: 'moodle-cron' with pid 300
+2024-10-29 11:14:46,533 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:17:45,354 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:17:46,358 INFO spawned: 'moodle-cron' with pid 304
+2024-10-29 11:17:47,511 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:20:46,368 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:20:47,372 INFO spawned: 'moodle-cron' with pid 305
+2024-10-29 11:20:48,531 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:23:47,979 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:23:48,983 INFO spawned: 'moodle-cron' with pid 306
+2024-10-29 11:23:50,147 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:26:49,976 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:26:50,979 INFO spawned: 'moodle-cron' with pid 307
+2024-10-29 11:26:52,139 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:29:51,668 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:29:52,672 INFO spawned: 'moodle-cron' with pid 308
+2024-10-29 11:29:53,844 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:32:52,857 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:32:53,861 INFO spawned: 'moodle-cron' with pid 309
+2024-10-29 11:32:55,023 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:35:53,832 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:35:54,836 INFO spawned: 'moodle-cron' with pid 310
+2024-10-29 11:35:55,990 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:38:54,635 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:38:55,639 INFO spawned: 'moodle-cron' with pid 311
+2024-10-29 11:38:56,799 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:41:55,629 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:41:56,632 INFO spawned: 'moodle-cron' with pid 312
+2024-10-29 11:41:57,800 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:44:56,634 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:44:57,639 INFO spawned: 'moodle-cron' with pid 313
+2024-10-29 11:44:58,788 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:47:57,979 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:47:58,983 INFO spawned: 'moodle-cron' with pid 314
+2024-10-29 11:48:00,146 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:50:59,361 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:51:00,366 INFO spawned: 'moodle-cron' with pid 315
+2024-10-29 11:51:01,531 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:54:00,418 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:54:01,423 INFO spawned: 'moodle-cron' with pid 316
+2024-10-29 11:54:03,076 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 11:57:01,981 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 11:57:02,986 INFO spawned: 'moodle-cron' with pid 317
+2024-10-29 11:57:04,146 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:00:03,368 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:00:04,372 INFO spawned: 'moodle-cron' with pid 318
+2024-10-29 12:00:05,536 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:03:04,434 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:03:05,439 INFO spawned: 'moodle-cron' with pid 319
+2024-10-29 12:03:06,624 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:06:05,674 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:06:06,678 INFO spawned: 'moodle-cron' with pid 320
+2024-10-29 12:06:07,849 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:09:06,750 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:09:07,754 INFO spawned: 'moodle-cron' with pid 321
+2024-10-29 12:09:08,905 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:12:07,084 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:12:08,088 INFO spawned: 'moodle-cron' with pid 322
+2024-10-29 12:12:09,234 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:15:08,229 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:15:09,234 INFO spawned: 'moodle-cron' with pid 323
+2024-10-29 12:15:10,395 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:18:09,283 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:18:10,287 INFO spawned: 'moodle-cron' with pid 327
+2024-10-29 12:18:11,453 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:21:10,559 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:21:11,563 INFO spawned: 'moodle-cron' with pid 328
+2024-10-29 12:21:12,720 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:24:11,578 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:24:12,583 INFO spawned: 'moodle-cron' with pid 329
+2024-10-29 12:24:13,749 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:27:12,722 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:27:13,727 INFO spawned: 'moodle-cron' with pid 330
+2024-10-29 12:27:14,891 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:30:14,012 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:30:15,015 INFO spawned: 'moodle-cron' with pid 331
+2024-10-29 12:30:16,168 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:33:16,026 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:33:17,030 INFO spawned: 'moodle-cron' with pid 332
+2024-10-29 12:33:18,185 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:36:17,206 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:36:18,210 INFO spawned: 'moodle-cron' with pid 333
+2024-10-29 12:36:19,378 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:39:18,227 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:39:19,232 INFO spawned: 'moodle-cron' with pid 334
+2024-10-29 12:39:20,391 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:42:19,563 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:42:20,567 INFO spawned: 'moodle-cron' with pid 335
+2024-10-29 12:42:21,717 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:45:20,775 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:45:21,779 INFO spawned: 'moodle-cron' with pid 336
+2024-10-29 12:45:22,932 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:48:21,810 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:48:22,813 INFO spawned: 'moodle-cron' with pid 337
+2024-10-29 12:48:23,972 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:51:22,160 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:51:23,164 INFO spawned: 'moodle-cron' with pid 338
+2024-10-29 12:51:24,326 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:54:23,234 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:54:24,239 INFO spawned: 'moodle-cron' with pid 339
+2024-10-29 12:54:25,400 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 12:57:24,508 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 12:57:25,512 INFO spawned: 'moodle-cron' with pid 340
+2024-10-29 12:57:26,668 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:00:25,836 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:00:26,840 INFO spawned: 'moodle-cron' with pid 341
+2024-10-29 13:00:28,004 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:03:26,935 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:03:27,939 INFO spawned: 'moodle-cron' with pid 342
+2024-10-29 13:03:29,110 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:06:28,087 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:06:29,092 INFO spawned: 'moodle-cron' with pid 343
+2024-10-29 13:06:30,242 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:09:29,111 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:09:30,115 INFO spawned: 'moodle-cron' with pid 344
+2024-10-29 13:09:31,261 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:12:30,482 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:12:31,485 INFO spawned: 'moodle-cron' with pid 345
+2024-10-29 13:12:32,640 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:15:31,623 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:15:32,628 INFO spawned: 'moodle-cron' with pid 346
+2024-10-29 13:15:33,781 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:18:32,626 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:18:33,630 INFO spawned: 'moodle-cron' with pid 350
+2024-10-29 13:18:34,786 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:21:33,791 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:21:34,796 INFO spawned: 'moodle-cron' with pid 351
+2024-10-29 13:21:35,949 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:24:34,799 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:24:35,803 INFO spawned: 'moodle-cron' with pid 352
+2024-10-29 13:24:36,961 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:27:35,998 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:27:37,002 INFO spawned: 'moodle-cron' with pid 353
+2024-10-29 13:27:38,164 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:30:37,370 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:30:38,375 INFO spawned: 'moodle-cron' with pid 354
+2024-10-29 13:30:39,539 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:33:38,401 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:33:39,403 INFO spawned: 'moodle-cron' with pid 355
+2024-10-29 13:33:40,573 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:36:39,580 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:36:40,584 INFO spawned: 'moodle-cron' with pid 356
+2024-10-29 13:36:41,736 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:39:40,658 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:39:41,662 INFO spawned: 'moodle-cron' with pid 357
+2024-10-29 13:39:42,818 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:42:41,994 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:42:42,998 INFO spawned: 'moodle-cron' with pid 358
+2024-10-29 13:42:44,162 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:45:43,130 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:45:44,135 INFO spawned: 'moodle-cron' with pid 359
+2024-10-29 13:45:45,291 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:48:44,157 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:48:45,162 INFO spawned: 'moodle-cron' with pid 360
+2024-10-29 13:48:46,321 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:51:45,509 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:51:46,514 INFO spawned: 'moodle-cron' with pid 361
+2024-10-29 13:51:47,667 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:54:46,600 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:54:47,604 INFO spawned: 'moodle-cron' with pid 362
+2024-10-29 13:54:48,765 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 13:57:47,792 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 13:57:48,796 INFO spawned: 'moodle-cron' with pid 363
+2024-10-29 13:57:49,955 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:00:48,149 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:00:49,153 INFO spawned: 'moodle-cron' with pid 364
+2024-10-29 14:00:50,313 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:03:49,254 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:03:50,259 INFO spawned: 'moodle-cron' with pid 365
+2024-10-29 14:03:51,408 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:06:50,153 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:06:51,156 INFO spawned: 'moodle-cron' with pid 366
+2024-10-29 14:06:52,341 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:09:51,921 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:09:52,924 INFO spawned: 'moodle-cron' with pid 367
+2024-10-29 14:09:54,097 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:12:53,222 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:12:54,226 INFO spawned: 'moodle-cron' with pid 368
+2024-10-29 14:12:55,384 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:15:54,403 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:15:55,407 INFO spawned: 'moodle-cron' with pid 369
+2024-10-29 14:15:56,565 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:18:55,395 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:18:56,399 INFO spawned: 'moodle-cron' with pid 373
+2024-10-29 14:18:57,567 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:21:56,696 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:21:57,700 INFO spawned: 'moodle-cron' with pid 374
+2024-10-29 14:21:58,856 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:24:57,710 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:24:58,714 INFO spawned: 'moodle-cron' with pid 375
+2024-10-29 14:24:59,873 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:27:58,923 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:27:59,927 INFO spawned: 'moodle-cron' with pid 376
+2024-10-29 14:28:01,091 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:31:00,297 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:31:01,301 INFO spawned: 'moodle-cron' with pid 377
+2024-10-29 14:31:02,949 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:34:01,699 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:34:02,703 INFO spawned: 'moodle-cron' with pid 378
+2024-10-29 14:34:03,860 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:37:02,895 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:37:03,900 INFO spawned: 'moodle-cron' with pid 379
+2024-10-29 14:37:05,049 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:40:03,148 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:40:04,152 INFO spawned: 'moodle-cron' with pid 380
+2024-10-29 14:40:05,306 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:43:04,249 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:43:05,253 INFO spawned: 'moodle-cron' with pid 381
+2024-10-29 14:43:06,415 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:46:05,455 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:46:06,459 INFO spawned: 'moodle-cron' with pid 382
+2024-10-29 14:46:07,611 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:49:06,462 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:49:07,467 INFO spawned: 'moodle-cron' with pid 383
+2024-10-29 14:49:08,634 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:52:07,842 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:52:08,847 INFO spawned: 'moodle-cron' with pid 384
+2024-10-29 14:52:09,997 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:55:08,043 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:55:09,047 INFO spawned: 'moodle-cron' with pid 385
+2024-10-29 14:55:10,197 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 14:58:09,076 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 14:58:10,081 INFO spawned: 'moodle-cron' with pid 386
+2024-10-29 14:58:11,226 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 15:01:10,384 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 15:01:11,389 INFO spawned: 'moodle-cron' with pid 387
+2024-10-29 15:01:12,549 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 15:04:11,454 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 15:04:12,458 INFO spawned: 'moodle-cron' with pid 388
+2024-10-29 15:04:13,613 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 15:07:12,608 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 15:07:13,612 INFO spawned: 'moodle-cron' with pid 389
+2024-10-29 15:07:14,765 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 15:10:13,968 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 15:10:14,972 INFO spawned: 'moodle-cron' with pid 390
+2024-10-29 15:10:16,142 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 15:13:15,365 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 15:13:16,370 INFO spawned: 'moodle-cron' with pid 391
+2024-10-29 15:13:17,548 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 16:05:37,458 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 16:05:38,463 INFO spawned: 'moodle-cron' with pid 392
+2024-10-29 16:05:39,635 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 17:10:48,602 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 17:10:49,607 INFO spawned: 'moodle-cron' with pid 393
+2024-10-29 17:10:50,774 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 18:15:39,029 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 18:15:40,034 INFO spawned: 'moodle-cron' with pid 394
+2024-10-29 18:15:41,211 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 19:19:31,209 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 19:19:32,214 INFO spawned: 'moodle-cron' with pid 395
+2024-10-29 19:19:33,396 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 20:23:41,512 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 20:23:42,517 INFO spawned: 'moodle-cron' with pid 396
+2024-10-29 20:23:43,689 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 21:27:11,135 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 21:27:12,139 INFO spawned: 'moodle-cron' with pid 397
+2024-10-29 21:27:13,316 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 22:31:41,554 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 22:31:42,559 INFO spawned: 'moodle-cron' with pid 398
+2024-10-29 22:31:43,734 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-29 23:35:13,304 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-29 23:35:14,308 INFO spawned: 'moodle-cron' with pid 399
+2024-10-29 23:35:15,493 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 00:38:35,747 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 00:38:36,752 INFO spawned: 'moodle-cron' with pid 400
+2024-10-30 00:38:37,925 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 01:33:40,735 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 01:33:41,740 INFO spawned: 'moodle-cron' with pid 401
+2024-10-30 01:33:42,913 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 02:30:12,702 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 02:30:13,707 INFO spawned: 'moodle-cron' with pid 402
+2024-10-30 02:30:14,875 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 03:33:46,405 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 03:33:47,408 INFO spawned: 'moodle-cron' with pid 403
+2024-10-30 03:33:48,577 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 04:37:23,483 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 04:37:24,488 INFO spawned: 'moodle-cron' with pid 408
+2024-10-30 04:37:25,656 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:34:06,039 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:34:07,043 INFO spawned: 'moodle-cron' with pid 409
+2024-10-30 05:34:08,202 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:37:07,174 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:37:08,179 INFO spawned: 'moodle-cron' with pid 410
+2024-10-30 05:37:09,336 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:40:08,407 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:40:09,411 INFO spawned: 'moodle-cron' with pid 411
+2024-10-30 05:40:10,568 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:43:09,487 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:43:10,492 INFO spawned: 'moodle-cron' with pid 412
+2024-10-30 05:43:11,655 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:46:10,675 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:46:11,680 INFO spawned: 'moodle-cron' with pid 413
+2024-10-30 05:46:12,845 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:49:11,654 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:49:12,658 INFO spawned: 'moodle-cron' with pid 414
+2024-10-30 05:49:13,806 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:52:12,124 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:52:13,129 INFO spawned: 'moodle-cron' with pid 415
+2024-10-30 05:52:14,294 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:55:13,321 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:55:14,326 INFO spawned: 'moodle-cron' with pid 416
+2024-10-30 05:55:15,508 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 05:58:14,290 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 05:58:15,295 INFO spawned: 'moodle-cron' with pid 417
+2024-10-30 05:58:16,459 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:01:15,663 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:01:16,667 INFO spawned: 'moodle-cron' with pid 418
+2024-10-30 06:01:17,844 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:04:16,089 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:04:17,094 INFO spawned: 'moodle-cron' with pid 419
+2024-10-30 06:04:18,265 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:07:17,790 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:07:18,795 INFO spawned: 'moodle-cron' with pid 420
+2024-10-30 06:07:19,973 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:10:18,284 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:10:19,288 INFO spawned: 'moodle-cron' with pid 421
+2024-10-30 06:10:20,479 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:13:19,189 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:13:20,193 INFO spawned: 'moodle-cron' with pid 422
+2024-10-30 06:13:21,361 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:16:20,363 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:16:21,368 INFO spawned: 'moodle-cron' with pid 423
+2024-10-30 06:16:22,538 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:19:21,234 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:19:22,239 INFO spawned: 'moodle-cron' with pid 427
+2024-10-30 06:19:23,406 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:22:22,334 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:22:23,339 INFO spawned: 'moodle-cron' with pid 428
+2024-10-30 06:22:24,498 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:25:23,390 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:25:24,395 INFO spawned: 'moodle-cron' with pid 440
+2024-10-30 06:25:25,567 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:28:24,280 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:28:25,285 INFO spawned: 'moodle-cron' with pid 441
+2024-10-30 06:28:26,444 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:31:25,763 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:31:26,767 INFO spawned: 'moodle-cron' with pid 442
+2024-10-30 06:31:27,941 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:34:26,741 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:34:27,745 INFO spawned: 'moodle-cron' with pid 443
+2024-10-30 06:34:28,911 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:37:27,854 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:37:28,859 INFO spawned: 'moodle-cron' with pid 444
+2024-10-30 06:37:30,028 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:40:28,109 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:40:29,113 INFO spawned: 'moodle-cron' with pid 445
+2024-10-30 06:40:30,300 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:43:29,054 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:43:30,059 INFO spawned: 'moodle-cron' with pid 446
+2024-10-30 06:43:31,254 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:46:30,210 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:46:31,215 INFO spawned: 'moodle-cron' with pid 447
+2024-10-30 06:46:32,385 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:49:31,108 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:49:32,113 INFO spawned: 'moodle-cron' with pid 448
+2024-10-30 06:49:33,281 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:52:32,516 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:52:33,521 INFO spawned: 'moodle-cron' with pid 449
+2024-10-30 06:52:34,691 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:55:33,596 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:55:34,600 INFO spawned: 'moodle-cron' with pid 506
+2024-10-30 06:55:35,763 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 06:58:34,397 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 06:58:35,401 INFO spawned: 'moodle-cron' with pid 507
+2024-10-30 06:58:36,568 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:01:35,844 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:01:36,849 INFO spawned: 'moodle-cron' with pid 508
+2024-10-30 07:01:38,028 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:04:36,663 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:04:37,668 INFO spawned: 'moodle-cron' with pid 509
+2024-10-30 07:04:38,833 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:07:37,664 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:07:38,669 INFO spawned: 'moodle-cron' with pid 510
+2024-10-30 07:07:39,834 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:10:39,028 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:10:40,032 INFO spawned: 'moodle-cron' with pid 511
+2024-10-30 07:10:41,203 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:14:20,499 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:14:21,502 INFO spawned: 'moodle-cron' with pid 512
+2024-10-30 07:14:22,681 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:17:21,401 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:17:22,405 INFO spawned: 'moodle-cron' with pid 516
+2024-10-30 07:17:23,578 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:20:22,624 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:20:23,629 INFO spawned: 'moodle-cron' with pid 517
+2024-10-30 07:20:24,802 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:23:23,528 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:23:24,533 INFO spawned: 'moodle-cron' with pid 518
+2024-10-30 07:23:25,704 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:26:24,645 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:26:25,650 INFO spawned: 'moodle-cron' with pid 519
+2024-10-30 07:26:26,823 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:29:25,425 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:29:26,430 INFO spawned: 'moodle-cron' with pid 520
+2024-10-30 07:29:27,612 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:32:26,910 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:32:27,915 INFO spawned: 'moodle-cron' with pid 521
+2024-10-30 07:32:29,080 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:54:04,638 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:54:05,642 INFO spawned: 'moodle-cron' with pid 522
+2024-10-30 07:54:06,808 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 07:57:05,803 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 07:57:06,808 INFO spawned: 'moodle-cron' with pid 523
+2024-10-30 07:57:07,981 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:00:06,228 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:00:07,232 INFO spawned: 'moodle-cron' with pid 524
+2024-10-30 08:00:08,400 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:03:07,218 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:03:08,223 INFO spawned: 'moodle-cron' with pid 525
+2024-10-30 08:03:09,389 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:06:08,349 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:06:09,354 INFO spawned: 'moodle-cron' with pid 526
+2024-10-30 08:06:10,517 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:09:09,355 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:09:10,359 INFO spawned: 'moodle-cron' with pid 527
+2024-10-30 08:09:11,515 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:12:10,711 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:12:11,715 INFO spawned: 'moodle-cron' with pid 528
+2024-10-30 08:12:12,890 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:31:04,005 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:31:05,010 INFO spawned: 'moodle-cron' with pid 529
+2024-10-30 08:31:06,182 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:34:05,988 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:34:06,992 INFO spawned: 'moodle-cron' with pid 530
+2024-10-30 08:34:08,169 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:37:07,197 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:37:08,202 INFO spawned: 'moodle-cron' with pid 531
+2024-10-30 08:37:09,375 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:40:08,521 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:40:09,525 INFO spawned: 'moodle-cron' with pid 532
+2024-10-30 08:40:10,684 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:43:09,403 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:43:10,408 INFO spawned: 'moodle-cron' with pid 533
+2024-10-30 08:43:11,575 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:46:10,399 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:46:11,404 INFO spawned: 'moodle-cron' with pid 534
+2024-10-30 08:46:12,574 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:49:11,238 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:49:12,243 INFO spawned: 'moodle-cron' with pid 535
+2024-10-30 08:49:13,413 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:52:12,647 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:52:13,651 INFO spawned: 'moodle-cron' with pid 536
+2024-10-30 08:52:14,816 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:55:13,830 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:55:14,835 INFO spawned: 'moodle-cron' with pid 537
+2024-10-30 08:55:16,020 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 08:58:14,821 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 08:58:15,826 INFO spawned: 'moodle-cron' with pid 538
+2024-10-30 08:58:16,995 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 09:01:15,136 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 09:01:16,141 INFO spawned: 'moodle-cron' with pid 539
+2024-10-30 09:01:17,305 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 09:04:17,029 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 09:04:18,034 INFO spawned: 'moodle-cron' with pid 540
+2024-10-30 09:04:19,206 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 09:07:18,070 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 09:07:19,074 INFO spawned: 'moodle-cron' with pid 541
+2024-10-30 09:07:20,242 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-10-30 09:10:19,364 INFO exited: moodle-cron (exit status 0; expected)
+2024-10-30 09:10:20,369 INFO spawned: 'moodle-cron' with pid 542
+2024-10-30 09:10:21,537 INFO success: moodle-cron entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
