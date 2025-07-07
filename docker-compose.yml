@@ -9,7 +9,6 @@ services:
         - app_port=${APP_PORT}
         - db_root_password=${DB_ROOT_PASSWORD}
     container_name: moodle-app
-
     links:
       - db
     ports:

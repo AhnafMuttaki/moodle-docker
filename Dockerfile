@@ -1,10 +1,8 @@
-# Use PHP 8.2 FPM base image for Laravel
-FROM php:8.3-fpm
+# Use PHP 8.3 Apache base image for Moodle
+FROM php:8.3-apache
 
-# Install system dependencies for Nginx, Supervisor, and Cron
+# Install system dependencies for Apache, Supervisor, and Cron
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    nginx \
     supervisor \
     cron \
     libpng-dev \
@@ -21,19 +19,18 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libxml2-dev
 
-# Install PHP extensions needed for Laravel and PostgreSQL
+# Enable Apache mods
+RUN a2enmod rewrite headers env
+
+# Install PHP extensions needed for Moodle
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 RUN docker-php-ext-install zip && docker-php-ext-enable zip
 RUN docker-php-ext-install gd && docker-php-ext-enable gd
 RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
 RUN docker-php-ext-install soap && docker-php-ext-enable soap
-# Enable the exif extension
 RUN docker-php-ext-enable opcache
-
-RUN docker-php-ext-install exif
-RUN docker-php-ext-configure exif
-RUN docker-php-ext-enable exif
+RUN docker-php-ext-install exif && docker-php-ext-enable exif
 
 # Add custom opcache configuration
 COPY ./docker/opcache.ini /usr/local/etc/php/conf.d/
@@ -41,27 +38,24 @@ COPY ./docker/opcache.ini /usr/local/etc/php/conf.d/
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy the Laravel app source code into the container
+# Copy Moodle source code
 COPY ./moodle /var/www/html
-
 COPY ./moodledata /var/www/moodledata
 
-# Set permissions for Laravel
+# Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 777 /var/www/moodledata
 
-# Copy Nginx configuration
-COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+# Copy Apache config
+COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy Supervisor configuration
+# Copy Supervisor config
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copy the entrypoint script
+# Copy entrypoint script
 COPY ./docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose HTTP port
 EXPOSE 80
 
-# Run the entrypoint script
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
