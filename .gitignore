@@ -1,2 +1,7 @@
 db/data
 moodledata
+.DS_Store
+moodle/moodle-cron.log
+moodle/moodle-error.log
+moodle/supervisord.log
+moodle/mod/quiz/accessrule/proctoring
