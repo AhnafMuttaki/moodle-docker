@@ -43,7 +43,7 @@ $CFG->dblibrary = 'native';     // 'native' only at the moment
 $CFG->dbhost    = 'db';  // eg 'localhost' or 'db.isp.com' or IP
 $CFG->dbname    = 'moodle';     // database name, eg moodle
 $CFG->dbuser    = 'root';   // your database username
-$CFG->dbpass    = 'bs23';   // your database password
+$CFG->dbpass    = getenv('DB_ROOT_PASSWORD') ?: 'bs23';   // your database password
 $CFG->prefix    = 'mdl_';       // prefix to use for all table names
 $CFG->dboptions = array(
     'dbpersist' => false,       // should persistent database connections be
@@ -162,7 +162,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = 'http://example.com/moodle';
+$CFG->wwwroot   = getenv('APP_WWWROOT') ?: 'http://example.com/moodle';
 
 
 //=========================================================================
