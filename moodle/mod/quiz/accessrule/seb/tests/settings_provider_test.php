@@ -28,7 +28,7 @@ require_once(__DIR__ . '/test_helper_trait.php');
  * @copyright 2020 Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class settings_provider_test extends \advanced_testcase {
+final class settings_provider_test extends \advanced_testcase {
     use \quizaccess_seb_test_helper_trait;
 
     /**
@@ -93,7 +93,7 @@ class settings_provider_test extends \advanced_testcase {
      *
      * @return array
      */
-    public function settings_capability_data_provider() {
+    public static function settings_capability_data_provider(): array {
         $data = [];
 
         // Build first level SEB config settings. Any of this setting let us use SEB manual config.
@@ -177,7 +177,7 @@ class settings_provider_test extends \advanced_testcase {
     public function test_hideifs(): void {
         $settinghideifs = settings_provider::get_quiz_hideifs();
 
-        $this->assertCount(23, $settinghideifs);
+        $this->assertCount(25, $settinghideifs);
 
         $this->assertArrayHasKey('seb_templateid', $settinghideifs);
         $this->assertCount(1, $settinghideifs['seb_templateid']);
@@ -357,6 +357,26 @@ class settings_provider_test extends \advanced_testcase {
         $this->assert_hide_if(
             $settinghideifs['seb_enableaudiocontrol'][0],
             'seb_enableaudiocontrol',
+            'seb_requiresafeexambrowser',
+            'noteq',
+            settings_provider::USE_SEB_CONFIG_MANUALLY
+        );
+
+        $this->assertArrayHasKey('seb_allowcapturecamera', $settinghideifs);
+        $this->assertCount(1, $settinghideifs['seb_allowcapturecamera']);
+        $this->assert_hide_if(
+            $settinghideifs['seb_allowcapturecamera'][0],
+            'seb_allowcapturecamera',
+            'seb_requiresafeexambrowser',
+            'noteq',
+            settings_provider::USE_SEB_CONFIG_MANUALLY
+        );
+
+        $this->assertArrayHasKey('seb_allowcapturemicrophone', $settinghideifs);
+        $this->assertCount(1, $settinghideifs['seb_allowcapturemicrophone']);
+        $this->assert_hide_if(
+            $settinghideifs['seb_allowcapturemicrophone'][0],
+            'seb_allowcapturemicrophone',
             'seb_requiresafeexambrowser',
             'noteq',
             settings_provider::USE_SEB_CONFIG_MANUALLY
@@ -929,7 +949,7 @@ class settings_provider_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
 
-        $xml = file_get_contents(__DIR__ . '/fixtures/unencrypted.seb');
+        $xml = file_get_contents(self::get_fixture_path(__NAMESPACE__, 'unencrypted.seb'));
         $itemid = $this->create_test_draftarea_file($xml);
         $file = settings_provider::get_current_user_draft_file($itemid);
         $content = $file->get_content();
@@ -947,7 +967,7 @@ class settings_provider_test extends \advanced_testcase {
         $this->context = \context_module::instance($this->quiz->cmid);
         $this->set_up_user_and_role();
 
-        $xml = file_get_contents(__DIR__ . '/fixtures/unencrypted.seb');
+        $xml = file_get_contents(self::get_fixture_path(__NAMESPACE__, 'unencrypted.seb'));
 
         $draftitemid = $this->create_test_draftarea_file($xml);
 
@@ -969,7 +989,7 @@ class settings_provider_test extends \advanced_testcase {
         $this->context = \context_module::instance($this->quiz->cmid);
         $this->set_up_user_and_role();
 
-        $xml = file_get_contents(__DIR__ . '/fixtures/unencrypted.seb');
+        $xml = file_get_contents(self::get_fixture_path(__NAMESPACE__, 'unencrypted.seb'));
         $draftitemid = $this->create_test_draftarea_file($xml);
 
         settings_provider::save_filemanager_sebconfigfile_draftarea($draftitemid, $this->quiz->cmid);
@@ -998,7 +1018,7 @@ class settings_provider_test extends \advanced_testcase {
 
         $this->set_up_user_and_role();
 
-        $xml = file_get_contents(__DIR__ . '/fixtures/unencrypted.seb');
+        $xml = file_get_contents(self::get_fixture_path(__NAMESPACE__, 'unencrypted.seb'));
         $draftitemid = $this->create_test_draftarea_file($xml);
 
         $fs = get_file_storage();
@@ -1215,7 +1235,7 @@ class settings_provider_test extends \advanced_testcase {
         $this->context = \context_module::instance($this->quiz->cmid);
 
         // Save file.
-        $xml = file_get_contents(__DIR__ . '/fixtures/unencrypted.seb');
+        $xml = file_get_contents(self::get_fixture_path(__NAMESPACE__, 'unencrypted.seb'));
         $draftitemid = $this->create_test_draftarea_file($xml);
         settings_provider::save_filemanager_sebconfigfile_draftarea($draftitemid, $this->quiz->cmid);
         $settings = seb_quiz_settings::get_record(['quizid' => $this->quiz->id]);
@@ -1319,6 +1339,8 @@ class settings_provider_test extends \advanced_testcase {
         $allsettings->seb_regexblocked = 20;
         $allsettings->seb_templateid = 21;
         $allsettings->seb_allowedbrowserexamkeys = 22;
+        $allsettings->seb_allowcapturecamera = 23;
+        $allsettings->seb_allowcapturemicrophone = 24;
 
         return $allsettings;
     }
@@ -1422,6 +1444,8 @@ class settings_provider_test extends \advanced_testcase {
                 'seb_enableaudiocontrol' => [
                     'seb_muteonstartup' => [],
                 ],
+                'seb_allowcapturecamera' => [],
+                'seb_allowcapturemicrophone' => [],
                 'seb_allowspellchecking' => [],
                 'seb_activateurlfiltering' => [
                     'seb_filterembeddedcontent' => [],

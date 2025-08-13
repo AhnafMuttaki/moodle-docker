@@ -227,7 +227,7 @@ XPATH
         //div[@data-region='empty-message-container' and not(contains(@class, 'hidden')) and contains(., %locator%)]
 XPATH
     , 'group_message_tab' => <<<XPATH
-        .//*[@data-region='message-drawer']//button[@data-toggle='collapse' and contains(string(), %locator%)]
+        .//*[@data-region='message-drawer']//button[@data-bs-toggle='collapse' and contains(string(), %locator%)]
 XPATH
     , 'group_message_list_area' => <<<XPATH
         .//*[@data-region='message-drawer']//*[contains(@data-region, concat('view-overview-', %locator%))]
@@ -328,11 +328,17 @@ XPATH
 XPATH
         ,
             'date_time' => <<<XPATH
-.//fieldset[(%idMatch% or ./legend[%exactTagTextMatch%]) and (@data-fieldtype='date' or @data-fieldtype='date_time')]
+.//*[
+    (%idMatch% or ./legend[%exactTagTextMatch%]
+        or parent::div[@data-groupname=%locator% or ./label[contains(normalize-space(string(.)), %locator%)]]
+    ) and
+    (@data-fieldtype='date' or @data-fieldtype='date_time'
+        or @data-fieldtype='date_selector' or @data-fieldtype='date_time_selector')
+]
 XPATH
         ,
             'select_menu' => <<<XPATH
-//*[@role='combobox'][@aria-labelledby = //label[contains(normalize-space(string(.)), %locator%)]/@id]
+//*[@role='combobox'][@aria-labelledby = //span[contains(normalize-space(string(.)), %locator%)]/@id]
 XPATH
         ,
         ],

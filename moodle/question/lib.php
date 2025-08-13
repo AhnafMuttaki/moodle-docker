@@ -66,14 +66,36 @@ function core_question_output_fragment_question_data(array $args): string {
 
     $viewclass = empty($args['view']) ? \core_question\local\bank\view::class : clean_param($args['view'], PARAM_NOTAGS);
 
+    // Make sure the class passed through is valid (exists and is view or subclass of view).
+    if (!class_exists($viewclass) || !is_a($viewclass, \core_question\local\bank\view::class, true)) {
+        throw new invalid_parameter_exception('view parameter must be a valid view class');
+    }
+
     if (!empty($args['lastchanged'])) {
         $thispageurl->param('lastchanged', clean_param($args['lastchanged'], PARAM_INT));
     }
-    // This is highly suspicious, but it is the same approach taken in /question/edit.php. See MDL-79281.
-    $thispageurl->param('deleteall', 1);
+    if (!empty($args['view'])) {
+        $thispageurl->param('view', clean_param($args['view'], PARAM_NOTAGS));
+    }
+    if (!empty($args['extraparams'])) {
+        $thispageurl->param('extraparams', clean_param($args['extraparams'], PARAM_RAW));
+    }
     $questionbank = new $viewclass($contexts, $thispageurl, $course, $cm, $pagevars, $extraparams);
     $questionbank->add_standard_search_conditions();
     ob_start();
     $questionbank->display_question_list();
     return ob_get_clean();
+}
+
+/**
+ * Render and return a category selector for the categories in a given question bank.
+ *
+ * @param array $args ['bankcmid' => Course module ID of the question bank]
+ * @return string The rendered selector.
+ */
+function core_question_output_fragment_category_selector(array $args): string {
+    global $OUTPUT;
+    $context = \core\context\module::instance($args['bankcmid']);
+    $selector = new \core_question\output\question_category_selector([$context], autocomplete: true);
+    return $OUTPUT->render($selector);
 }

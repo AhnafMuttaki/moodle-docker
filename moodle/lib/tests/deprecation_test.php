@@ -30,7 +30,7 @@ use core\attribute\deprecated_with_reference;
  * @covers \core\attribute\deprecated_with_reference
  * @covers \core\deprecation
  */
-class deprecation_test extends \advanced_testcase {
+final class deprecation_test extends \advanced_testcase {
     /**
      * @dataProvider emit_provider
      */
@@ -187,11 +187,10 @@ class deprecation_test extends \advanced_testcase {
         ];
     }
 
-    public function test_deprecated_without_replacement(): void {
+    public function test_deprecated_missing_constuctor_parameters(): void {
         $this->expectException(\coding_exception::class);
-        new deprecated(
-            replacement: null,
-        );
+        $this->expectExceptionMessage('A deprecated item must provide either a replacement, reason, or an issue number.');
+        new deprecated();
     }
 
     /**
@@ -206,11 +205,17 @@ class deprecation_test extends \advanced_testcase {
 
             deprecation::emit_deprecation_if_present($reference);
             $this->assertDebuggingCalled(deprecation::get_deprecation_string($attribute));
+
+            deprecation::emit_deprecation($reference);
+            $this->assertDebuggingCalled(deprecation::get_deprecation_string($attribute));
         } else {
             $this->assertNull($attribute);
             $this->assertFalse(deprecation::is_deprecated($reference));
             deprecation::emit_deprecation_if_present($reference);
             $this->assertDebuggingNotCalled();
+
+            deprecation::emit_deprecation($reference);
+            $this->assertDebuggingCalled("Deprecation notice requested but object is not deprecated.");
         }
     }
 

@@ -70,7 +70,7 @@ class report_helper {
 
             }
             $selectmenu = new \core\output\select_menu('reporttype', $menuarray, $activeurl);
-            $selectmenu->set_label(get_string('reporttype'), ['class' => 'sr-only']);
+            $selectmenu->set_label(get_string('reporttype'), ['class' => 'visually-hidden']);
             $options = \html_writer::tag(
                 'div',
                 $OUTPUT->render_from_template('core/tertiary_navigation_selector', $selectmenu->export_for_template($OUTPUT)),
@@ -96,7 +96,7 @@ class report_helper {
      */
     #[\core\attribute\deprecated(null, reason: 'It is no longer used', since: '4.0', final: true)]
     public static function save_selected_report() {
-        \core\deprecation::emit_deprecation_if_present([self::class, __FUNCTION__]);
+        \core\deprecation::emit_deprecation([self::class, __FUNCTION__]);
     }
 
     /**
@@ -119,18 +119,17 @@ class report_helper {
         $course = get_course($courseid);
         $groupmode = groups_get_course_groupmode($course);
         $groupid = $filterparams->groupid ?? 0;
-        if ($groupmode == SEPARATEGROUPS || $groupid) {
-            $context = context_course::instance($courseid);
+        $context = context_course::instance($courseid);
+        if ($groupid || ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context))) {
             if ($groupid) {
                 $cgroups = [(int) $groupid];
             } else {
-                $cgroups = groups_get_all_groups(
-                    $courseid,
-                    has_capability('moodle/site:accessallgroups', $context) ? 0 : $USER->id
-                );
+                $cgroups = groups_get_all_groups($courseid, $USER->id);
                 $cgroups = array_keys($cgroups);
-                // If that's the case, limit the users to be in the groups only, defined by the filter.
-                if (has_capability('moodle/site:accessallgroups', $context) || empty($cgroups)) {
+                // If you are not in any groups you can still view users without group. This may
+                // perform poorly because it will list all users in the entire system who do not
+                // belong to a group on this course.
+                if (empty($cgroups)) {
                     $cgroups[] = USERSWITHOUTGROUP;
                 }
             }
@@ -165,5 +164,45 @@ class report_helper {
             'params' => $params,
             'useridfilter' => $useridfilter,
         ];
+    }
+
+    /**
+     * Check if the user is in a valid group for the course (i.e. if the user is in a group in SEPARATEGROUPS mode)
+     *
+     * @param context $context context for the course or module: if context is a course context, the course group mode is used,
+     * if it is a module context, the module effective group mode is used (combined with the current user).
+     * @param int|null $userid user id to check, if null the current user is used
+     * @return bool true if the user is in a valid group (i.e. belongs to a group in SEPARATEGROUPS MODE), false otherwise
+     */
+    public static function has_valid_group(\context $context, ?int $userid = null): bool {
+        global $USER;
+
+        $userid = $userid ?? $USER->id;
+
+        if ($context instanceof context_course) {
+            $courseid = $context->instanceid;
+            $course = get_course($courseid);
+            $groupmode = $course->groupmode;
+        } else if ($context instanceof \context_module) {
+            $courseid = $context->get_course_context()->instanceid;
+            $modinfo = get_fast_modinfo($courseid);
+            $cm = $modinfo->get_cm($context->instanceid);
+            $groupmode = $cm->effectivegroupmode;
+        } else {
+            return true; // No groups in system context.
+        }
+
+        if ($groupmode != SEPARATEGROUPS) {
+            return true; // No groups or visible all groups.
+        }
+
+        if (!has_capability('moodle/site:accessallgroups', $context, $userid)) {
+            $usergroups = groups_get_all_groups($courseid, $userid);
+            if (empty($usergroups)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

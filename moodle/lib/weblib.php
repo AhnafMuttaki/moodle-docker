@@ -1079,6 +1079,7 @@ function purify_html($text, $options = array()) {
 
         $config->set('HTML.DefinitionID', 'moodlehtml');
         $config->set('HTML.DefinitionRev', 7);
+        $config->set('CSS.Proprietary', true);
         $config->set('Cache.SerializerPath', $cachedir);
         $config->set('Cache.SerializerPermissions', $CFG->directorypermissions);
         $config->set('Core.NormalizeNewlines', false);
@@ -1237,15 +1238,9 @@ function text_to_html($text, $smileyignored = null, $para = true, $newlines = tr
  * @return string Converted text
  */
 function markdown_to_html($text) {
-    global $CFG;
-
     if ($text === '' or $text === null) {
         return $text;
     }
-
-    require_once($CFG->libdir .'/markdown/MarkdownInterface.php');
-    require_once($CFG->libdir .'/markdown/Markdown.php');
-    require_once($CFG->libdir .'/markdown/MarkdownExtra.php');
 
     return \Michelf\MarkdownExtra::defaultTransform($text);
 }
@@ -1569,8 +1564,7 @@ function send_headers($contenttype, $cacheable = true) {
         @header('Expires: ');
     } else {
         // Do everything we can to always prevent clients and proxies caching.
-        @header('Cache-Control: no-store, no-cache, must-revalidate');
-        @header('Cache-Control: post-check=0, pre-check=0, no-transform', false);
+        @header('Cache-Control: no-store, no-cache, must-revalidate, no-transform');
         @header('Pragma: no-cache');
         @header('Expires: Mon, 20 Aug 1969 09:23:00 GMT');
         @header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');

@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/repository/lib.php');
  * @copyright 2009 Jerome Mouneyrac
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class filelib_test extends \advanced_testcase {
+final class filelib_test extends \advanced_testcase {
     public function test_format_postdata_for_curlcall(): void {
 
         // POST params with just simple types.
@@ -1826,6 +1826,38 @@ EOF;
         $this->assertEquals($fifthrecord['filename'], $allfiles[4]->filename);
     }
 
+    /**
+     * Test that zip files in the draftarea are returned.
+     * @covers ::file_get_all_files_in_draftarea
+     */
+    public function test_file_get_all_files_in_draftarea_zip_files(): void {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        $zip1 = ['filename' => 'basezip.zip'];
+        $file = self::create_draft_file($zip1);
+
+        $zip2 = [
+            'filename' => 'infolder.zip',
+            'filepath' => '/assignment/',
+            'itemid' => $file->get_itemid(),
+        ];
+        $file = self::create_draft_file($zip2);
+
+        $otherfile = [
+            'filename' => 'otherfile.txt',
+            'filepath' => '/secondfolder/',
+            'itemid' => $file->get_itemid(),
+        ];
+        $file = self::create_draft_file($otherfile);
+
+        $allfiles = file_get_all_files_in_draftarea($file->get_itemid());
+        $this->assertCount(3, $allfiles);
+        $this->assertEquals($zip1['filename'], $allfiles[0]->filename);
+        $this->assertEquals($zip2['filename'], $allfiles[1]->filename);
+        $this->assertEquals($otherfile['filename'], $allfiles[2]->filename);
+    }
+
     public function test_file_copy_file_to_file_area(): void {
         // Create two files in different draft areas but owned by the same user.
         global $USER;
@@ -2043,6 +2075,56 @@ EOF;
                 'text/html',
             ],
         ];
+    }
+
+    /**
+     * Tests that readfile_accel() triggers the expected debugging message when a non-empty
+     * output buffer is detected, using both a file path and a stored_file input.
+     *
+     * This test runs a CLI script in a separate process to isolate buffer manipulation.
+     * This is necessary because readfile_accel() uses ob_get_clean() and ob_end_flush(),
+     * which interfere with PHPUnit's internal output buffer enforcement and cause risky
+     * test errors.
+     *
+     * The CLI script simulates a non-empty output buffer, calls the readfile_accel(), and
+     * prints any debugging output. The test then captures that output and asserts that the
+     * correct debugging message was generated.
+     *
+     * @covers ::readfile_accel
+     */
+    public function test_readfile_accel_with_path_and_stored_file(): void {
+        $this->resetAfterTest();
+
+        // Construct the command to run the CLI script with a custom constant defined.
+        $scriptpath = __DIR__ . '/fixtures/readfile_accel_debug_cli.php';
+        $cmd = 'php -r ' . escapeshellarg("define('PHPUNIT_READFILE_ACCEL_TEST', true); require '$scriptpath';");
+
+        $pipes = [];
+        $process = proc_open($cmd, [
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ], $pipes);
+
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+
+        $exitcode = proc_close($process);
+
+        $output = $stdout . $stderr;
+
+        // Debug just in case the subprocess fails.
+        $this->assertSame(0, $exitcode);
+
+        // Validate that both path-based and stored_file debugging messages are present.
+        $filename = "readfile_accel.txt";
+        $filepath = '/tmp/' . $filename;
+        $this->assertStringContainsString('Non-empty default output handler buffer detected while serving the file ' .
+            $filepath . '. Buffer contents (first 20 characters): test text', $output);
+        $this->assertStringContainsString('Non-empty default output handler buffer detected while serving the file ' .
+            $filename . '. Buffer contents (first 20 characters): test text', $output);
     }
 }
 
