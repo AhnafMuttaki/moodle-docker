@@ -1,7 +1,13 @@
 db/data
 moodledata
 .DS_Store
+moodle/mod/quiz/accessrule/proctoring
 moodle/moodle-cron.log
 moodle/moodle-error.log
 moodle/supervisord.log
-moodle/mod/quiz/accessrule/proctoring
+moodle/apache2.log
+moodle/apache2_error.log
+moodle/cron.log
+moodle/cron_error.log
+moodle/log-cleaner_error.log
+moodle/log-cleaner.log
