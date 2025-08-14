@@ -8,7 +8,7 @@ services:
       args:
         - app_port=${APP_PORT}
         - db_root_password=${DB_ROOT_PASSWORD}
-    container_name: moodle-app
+    container_name: moodle-app-500
     links:
       - db
     depends_on:
@@ -24,7 +24,7 @@ services:
   db:
     image: mysql:8.4
     env_file: .env
-    container_name: moodle-db
+    container_name: moodle-db-500
     ports:
       - ${MYSQL_PORT}:3306
     environment:
