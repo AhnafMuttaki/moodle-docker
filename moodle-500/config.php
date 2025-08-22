@@ -189,6 +189,9 @@ $CFG->dataroot  = '/var/www/moodledata-500';
 // When configured the on the web server the 'r.php' may be removed.
 $CFG->routerconfigured = false;
 
+// Set unique session cookie name for Moodle 5.0
+$CFG->sessioncookie = '500';
+
 //=========================================================================
 // 4. DATA FILES PERMISSIONS
 //=========================================================================
