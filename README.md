@@ -8,10 +8,15 @@
   cp example.env .env
   ```
 - Edit `.env` and set your desired values for:
-  - `DB_ROOT_PASSWORD`
-  - `APP_PORT`
-  - `MYSQL_PORT`
-  - `APP_WWWROOT`
+  
+  DB_ROOT_PASSWORD
+  APP_405_PORT
+  APP_500_PORT
+  MYSQL_PORT
+  APP_405_WWWROOT
+  APP_500_WWWROOT
+  DB_405_NAME
+  DB_500_NAME
 
 ## 2. Start the Project
 
@@ -22,14 +27,15 @@
 
 ## 3. Set Permissions
 
-- Change the permission of the newly created `moodledata` directory:
+- Change the permission of the newly created `moodledata-405` and `moodledata-500`  directory:
   ```
-  sudo chmod 0777 moodledata/
+  sudo chmod 0777 moodledata-405/
+  sudo chmod 0777 moodledata-500/
   ```
 
 ## 4. Access Moodle
 
-- Open your browser and go to the URL set in `APP_WWWROOT` (default: http://localhost)
+- Open your browser and go to the URL set in `APP_405_WWWROOT` `APP_500_WWWROOT` (default: http://localhost)
 
 ---
 
