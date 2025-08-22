@@ -1,0 +1,61 @@
+# Use PHP 8.3 Apache base image for Moodle 5.0
+FROM php:8.3-apache
+
+# Install system dependencies for Apache, Supervisor, and Cron
+RUN apt-get update && apt-get install -y \
+    supervisor \
+    cron \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    libzip-dev \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libicu-dev \
+    libxml2-dev
+
+# Enable Apache mods
+RUN a2enmod rewrite headers env
+
+# Install PHP extensions needed for Moodle
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install zip && docker-php-ext-enable zip
+RUN docker-php-ext-install gd && docker-php-ext-enable gd
+RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl
+RUN docker-php-ext-install soap && docker-php-ext-enable soap
+RUN docker-php-ext-enable opcache
+RUN docker-php-ext-install exif && docker-php-ext-enable exif
+
+# Add custom opcache configuration
+COPY ./docker/opcache.ini /usr/local/etc/php/conf.d/
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy Moodle 5.0 source code
+COPY ./moodle-500 /var/www/html
+COPY ./moodledata-500 /var/www/moodledata
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 777 /var/www/moodledata
+
+# Copy Apache config
+COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Copy Supervisor config
+COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy entrypoint script
+COPY ./docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+EXPOSE 80
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
