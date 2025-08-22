@@ -178,7 +178,7 @@ $CFG->wwwroot   = getenv('APP_405_WWWROOT') ?: 'http://localhost:405';
 //
 // - On Windows systems you might specify something like 'c:\moodledata'
 
-$CFG->dataroot  = '/var/www/moodledata';
+$CFG->dataroot  = '/var/www/moodledata-405';
 
 // Whether the Moodle router is fully configured.
 //

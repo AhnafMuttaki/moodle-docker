@@ -16,7 +16,7 @@ services:
       - ${APP_405_PORT}:80
     volumes:
       - ./moodle-405:/var/www/html
-      - ./moodledata-405:/var/www/moodledata:rw
+      - ./moodledata-405:/var/www/moodledata-405:rw
       - ./docker/local.ini:/usr/local/etc/php/conf.d/local.ini
     restart: always
 
@@ -37,7 +37,7 @@ services:
       - ${APP_500_PORT}:80
     volumes:
       - ./moodle-500:/var/www/html
-      - ./moodledata-500:/var/www/moodledata:rw
+      - ./moodledata-500:/var/www/moodledata-500:rw
       - ./docker/local.ini:/usr/local/etc/php/conf.d/local.ini
     restart: always
 
