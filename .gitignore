@@ -1,7 +1,8 @@
 .env
 db/data
-moodledata-405
-moodledata-500
+moodledata-405/*
+moodledata-500/*
+moodledata-501/*
 .DS_Store
 moodle-405/mod/quiz/accessrule/proctoring
 moodle-405/moodle-cron.log
@@ -23,3 +24,16 @@ moodle-500/cron.log
 moodle-500/cron_error.log
 moodle-500/log-cleaner_error.log
 moodle-500/log-cleaner.log
+
+moodle-501/mod/quiz/accessrule/proctoring
+moodle-501/moodle-cron.log
+moodle-501/moodle-error.log
+moodle-501/supervisord.log
+moodle-501/apache2.log
+moodle-501/apache2_error.log
+moodle-501/cron.log
+moodle-501/cron_error.log
+moodle-501/log-cleaner_error.log
+moodle-501/log-cleaner.log
+
+

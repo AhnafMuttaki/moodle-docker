@@ -1,4 +1,4 @@
-# Use PHP 8.3 Apache base image for Moodle 5.0
+# Use PHP 8.3 Apache base image for Moodle 5.1
 FROM php:8.3-apache
 
 # Install system dependencies for Apache, Supervisor, and Cron
@@ -39,16 +39,16 @@ COPY ./docker/opcache.ini /usr/local/etc/php/conf.d/
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy Moodle 5.0 source code
-COPY ./moodle-500 /var/www/html
-COPY ./moodledata-500 /var/www/moodledata-500
+# Copy Moodle 5.1 source code
+COPY ./moodle-501 /var/www/html
+COPY ./moodledata-501 /var/www/moodledata-501
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chown -R www-data:www-data /var/www/moodledata-500
+    && chown -R www-data:www-data /var/www/moodledata-501
 
-# Copy Apache config
-COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+# Copy Apache config for Moodle 5.1 (with public directory support)
+COPY ./docker/apache-501.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy Supervisor config
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
