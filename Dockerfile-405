@@ -1,8 +1,9 @@
-# Use PHP 8.3 Apache base image for Moodle 4.0.5
-FROM php:8.3-apache
+# Use PHP 8.3 FPM base image for Moodle 4.0.5
+FROM php:8.3-fpm
 
-# Install system dependencies for Apache, Supervisor, and Cron
+# Install system dependencies for Nginx, Supervisor, and Cron
 RUN apt-get update && apt-get install -y \
+    nginx \
     supervisor \
     cron \
     libpng-dev \
@@ -18,9 +19,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     libicu-dev \
     libxml2-dev
-
-# Enable Apache mods
-RUN a2enmod rewrite headers env
 
 # Install PHP extensions needed for Moodle
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
@@ -41,14 +39,16 @@ WORKDIR /var/www/html
 
 # Copy Moodle 4.0.5 source code
 COPY ./moodle-405 /var/www/html
-COPY ./moodledata-405 /var/www/moodledata-405
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
+# Create moodledata directory with proper permissions
+# Note: actual data will be mounted via docker-compose volumes
+RUN mkdir -p /var/www/moodledata-405 \
+    && chown -R www-data:www-data /var/www/html \
     && chown -R www-data:www-data /var/www/moodledata-405
 
-# Copy Apache config
-COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+# Copy Nginx config
+COPY ./docker/nginx.conf /etc/nginx/sites-available/default
+RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Copy Supervisor config
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
